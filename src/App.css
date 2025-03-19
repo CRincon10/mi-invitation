@@ -5,14 +5,23 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: "Nefelibata";
+    src: url("../src/assets/fonts/Nefelibata-Script.ttf");
+    font-weight: normal;
+    font-style: normal;
+}
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "GreatVibes", cursive;
 }
 
-body {
+body, button, input {
     background: url(/src/assets/images/Fondo-invitacion.jpg) no-repeat center center fixed;
     background-size: cover;
+    font-family: "Nefelibata", cursive;
+}
+.title {
+    font-family: "GreatVibes", cursive;
 }

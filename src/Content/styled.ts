@@ -339,7 +339,7 @@ export const ModalContent = styled.div`
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
     text-align: center;
     width: 380px;
-    height: 500px;
+    height: 600px;
     /* position: relative; */
     border: 2px solid #b19776;
 `;

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import anillos from "../assets/images/anillos.jpg";
 import { useIsMobileListener } from "../listener";
-import { Button, Card, Circle, CloseButton, ConfirmationOption, Container, ContainerContent, ContentCenter, DescriptionText, Flex, Footer, IconsContainer, ImageContent, Input, ModalContent, ModalOverlay, OptionsContainer, TitleContent } from "./styled";
+import { Button, Circle, CloseButton, Container, ContainerContent, ContentCenter, DescriptionText, Flex, Footer, IconsContainer, ImageContent, Input, ModalContent, ModalOverlay, TitleContent } from "./styled";
 
 
 export default function Invitacion() {
@@ -62,7 +62,7 @@ export default function Invitacion() {
                     </ModalContent>
                 </ModalOverlay>
             )}
-            <TitleContent className={isMobile ? "isMobile" : ""}>
+            <TitleContent className={`${isMobile ? "isMobile" : ""} title`}>
                 <span>Juan Camilo Rincón</span>
                 <div className="row">
                     <span className="mr-2">&</span>
@@ -111,13 +111,13 @@ export default function Invitacion() {
                 </Flex>
                 <Flex w100 column gap={20} className="icons" padding={20} borderRadius={10}>
                     <span className="color-app" style={{ fontSize: "30px", fontWeight: "500" }}>Brindis</span>
-                    <Flex column alignCenter justifyCenter gap10 w100 h100 minHeight={180}>
+                    <Flex column alignCenter justifyCenter gap10 w100 h100 minHeight={160}>
                         <i className="fa-solid fa-martini-glass-empty secondary-icons"></i>
                         <Flex w100 flexWrap justifyCenter alignCenter style={{ textAlign: "center" }}>
                             <span className="color-app">Esclavas Misioneras del Santísimo Sacramento</span>
                         </Flex>
                     </Flex>
-                    <Flex w100 h100 minHeight={180}>
+                    <Flex w100 h100 minHeight={200}>
                         <a
                             href="https://maps.google.com?q=Cl+48C+Sur+%23+6,+Zona+7,+Envigado,+Antioquia"
                             target="_blank"
@@ -125,7 +125,7 @@ export default function Invitacion() {
                             style={{ textDecoration: "none", color: "inherit" }}
                         >
                             <Flex column marginTop={10} alignCenter gap10 cursorPointer h100>
-                                <i className="fa-solid fa-location-pin secondary-icons" />
+                                <i className="fa-regular fa-location-dot secondary-icons" />
                                 <Flex flexWrap justifyCenter alignCenter style={{ textAlign: "center" }} >
                                     <span style={{ color: "#747567", textDecoration: "underline" }}>Cl 48C Sur # 6, Zona 7, Envigado, Antioquia</span>
                                 </Flex>
@@ -141,12 +141,9 @@ export default function Invitacion() {
                 </Flex>
             </IconsContainer>
             <Flex w100 padding={20}>
-                <Button
-                    onClick={() => setOpenConfirm(true)}
-                >
-                    Confirmar asistencia
+                <Button onClick={() => setOpenConfirm(true)} className="button">
+                    <span>Confirmar asistencia</span>
                 </Button>
-
             </Flex>
 
             <ContainerContent className={isMobile ? "isMobile" : ""}>
