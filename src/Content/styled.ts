@@ -134,10 +134,6 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
     flex-direction: column;
-    width: 100vw;
-    height: 100vh;
-    background-size: cover;
-    background-repeat: no-repeat;
     background-position: center;
     gap: 30px;
 
@@ -258,7 +254,7 @@ export const Card = styled.div`
 `;
 
 export const Button = styled.button`
-    background:rgb(248, 150, 141);
+    background: rgb(248, 150, 141);
     color: white;
     border: none;
     padding: 10px 20px;
@@ -271,6 +267,11 @@ export const Button = styled.button`
 
     &:hover {
         background: #e65c50;
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+        background: rgb(255, 192, 186); /* Mantener el mismo color */
     }
 `;
 
@@ -321,16 +322,18 @@ export const Footer = styled.div`
 
 export const ModalOverlay = styled.div`
     position: fixed;
-    top: 40;
     left: 0;
     width: 100%;
     height: 100%;
-    padding-top: 60px;
+    padding-top: 10px;
     background: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
-    /* align-items: center; */
     z-index: 1000;
+
+    &.isMobile {
+        padding-top: 20px;
+    }
 `;
 
 export const ModalContent = styled.div`
@@ -339,12 +342,13 @@ export const ModalContent = styled.div`
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
     text-align: center;
     width: 380px;
-    height: 600px;
-    /* position: relative; */
+    min-height: 400px;
+    max-height: 90vh;
+    overflow-y: auto;
     border: 2px solid #b19776;
 `;
 
-export const CloseButton = styled.button`
+export const CloseButton = styled.div`
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
@@ -385,15 +389,72 @@ export const Circle = styled.div<CircleProps>`
     transition: background 0.3s ease, color 0.3s ease;
 `;
 
-export const Input = styled.input`
+export const InputApp = styled.input`
     width: 100%;
     padding: 10px;
     margin-top: 10px;
     border: 1px solid #b19776;
     border-radius: 5px;
     font-size: 20px;
+    font-family: "Nefelibata", cursive;
+    background-size: cover;
 `;
 
 interface CircleProps {
     selected: boolean;
 }
+
+//USERS LOGGED
+
+export const ContainerLogged = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    min-height: 100vh;
+    width: 100%;
+`;
+
+export const ConfirmacionesContainer = styled.div`
+    background: white;
+    padding: 10px;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    border-radius: 10px;
+
+    ol {
+        font-size: 18px;
+        color: #333;
+        line-height: 1.8;
+        gap: 10px;
+    }
+
+    li {
+        background: #f8f8f8;
+        padding: 10px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        gap: 10px;
+        margin-bottom: 5px;
+    }
+
+    .asiste {
+        font-weight: bold;
+        color: green;
+    }
+
+    .no-asiste {
+        font-weight: bold;
+        color: red;
+    }
+
+    .no-confirmaciones {
+        text-align: center;
+        font-size: 18px;
+        color: #888;
+    }
+`;
+
