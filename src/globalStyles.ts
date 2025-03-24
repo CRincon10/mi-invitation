@@ -36,10 +36,11 @@ const GlobalStyle = createGlobalStyle`
         }
     }
 
-    .content-invitation, input-confirmation {
+    .content-invitation, .input-confirmation {
         background: url(${backgroundImage}) no-repeat center center fixed;
         background-size: cover;
         font-family: "Nefelibata", cursive;
+        background-attachment: scroll;
     }
     
     button{
