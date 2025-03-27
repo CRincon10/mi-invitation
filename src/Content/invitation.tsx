@@ -9,7 +9,7 @@ export interface ConfirmedDataState {
     id:string;
     nombre: string;
     asiste: boolean;
-    fechaConfirmacion: Date;
+    fechaConfirmacion: any;
     acompanante: boolean;
     nombreAcompanante: string | null;
 }

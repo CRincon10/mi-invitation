@@ -264,9 +264,21 @@ export const Button = styled.button`
     cursor: pointer;
     margin-top: 20px;
     transition: background 0.3s;
+    
+    &.small{
+        padding: 0px !important;
+        margin: 0px;
+        background: #b19776;
+        font-size: 18px;
+    }
 
     &:hover {
         background: #e65c50;
+        
+        &.small{
+            background:rgb(138, 117, 90);
+
+        }
     }
 
     &:disabled {
@@ -458,3 +470,42 @@ export const ConfirmacionesContainer = styled.div`
     }
 `;
 
+export const SelectWrapper = styled.div`
+    position: relative;
+    display: inline-block;
+    width: 100%;
+`;
+
+export const StyledSelect = styled.select`
+    width: 100%;
+    padding: 10px;
+    
+    background-color: #fff;
+    appearance: none;
+    cursor: pointer;
+    outline: none;
+    transition: 0.3s;
+
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #b19776;
+    color: #747567;
+    border-radius: 5px;
+    font-size: 20px;
+    font-family: "Nefelibata", cursive;
+    background-size: cover;
+`;
+
+export const StyledOption = styled.option`
+    font-size: 18px;
+`;
+
+export const IconWrapper = styled.div`
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none; /* Evita que el ícono interfiera con el select */
+    color: #666;
+`;
