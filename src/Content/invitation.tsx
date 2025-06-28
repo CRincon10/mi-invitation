@@ -17,6 +17,9 @@ import {
     TitleContent
 } from "./styled";
 import { WeddingCountdown } from "./WeddingCountdown";
+import MusicPlayer from "./musicPlayer";
+import family from "../assets/images/family.jpg";
+
 export interface ConfirmedDataState {
     id: string;
     nombre: string;
@@ -238,15 +241,26 @@ export default function Invitacion() {
             </Flex>
 
             <Flex alignCenter justifyCenter maxWidth={500} padding={20}>
-                <span>
-                    “No me ruegues que te deje y que me aparte de ti, porque a dondequiera que tú vayas, yo iré; y dondequiera que tú vivas, yo viviré. Tu pueblo será mi pueblo, y tu Dios será mi Dios.”
+                <span style={{ fontSize: "20px", textAlign: "center" }}>
+                    “El amor es una parte del alma misma, es de la misma naturaleza que ella, es una chispa divina; como ella, es incorruptible, indivisible, imperecedero. Es una partícula de fuego que está en nosotros, que es inmortal e infinita, a la cual nada puede limitar, ni amortiguar”.
                 </span>
             </Flex>
-            <Footer>
-                <Flex>
-                    -
+            <Footer style={{ backgroundColor: "#fefefe" }}>
+                <Flex column alignCenter justifyCenter gap={10}>
+                    <img
+                        src={family}
+                        alt="Nuestra familia"
+                        style={{
+                            maxWidth: "100%",
+                            width: "400px",
+                            // borderRadius: "12px",
+                            boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
+                            objectFit: "cover"
+                        }}
+                    />
                 </Flex>
             </Footer>
+            <MusicPlayer />
         </Container>
     );
 }

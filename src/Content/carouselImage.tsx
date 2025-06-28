@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import imageHeader from "../assets/images/image-header.jpg";
 import imageHeader2 from "../assets/images/image-header2.jpg";
 import imageHeader3 from "../assets/images/image-header3.jpg";
-import imageHeader6 from "../assets/images/image-header6.jpg";
+import imageHeader5 from "../assets/images/image-header5.jpg";
 import { Flex } from "./styled";
 
 import { CarouselWrapper, Slide } from "./styled";
 // Lista de imágenes
-const images = [imageHeader, imageHeader2, imageHeader3, imageHeader6];
+const images = [imageHeader, imageHeader2, imageHeader3, imageHeader5];
 
 // Componente principal del carrusel
 export const ImageCarousel = () => {
@@ -43,7 +43,7 @@ export const ImageCarousel = () => {
                 ))}
             </CarouselWrapper>
             <Flex alignCenter justifyCenter>
-                <span>01.11.2025</span>
+                <span className="text-small">Medellín / 01.11.2025</span>
             </Flex>
         </Flex>
     );
