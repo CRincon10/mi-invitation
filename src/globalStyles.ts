@@ -1,20 +1,7 @@
 import { createGlobalStyle } from "styled-components";
-import greatVibes from "./assets/fonts/greatVibes-Regular.ttf";
-import nefelibata from "./assets/fonts/Nefelibata-Script.ttf";
-import backgroundImage from "./assets/images/Fondo-invitacion.jpg";
 
 
 const GlobalStyle = createGlobalStyle`
-    @font-face {
-        font-family: 'GreatVibes';
-        src: url(${greatVibes}) format('truetype');
-    }
-
-    @font-face {
-        font-family: 'nefelibata';
-        src: url(${nefelibata}) format('truetype');
-    }
-
     * {
         margin: 0;
         padding: 0;
@@ -25,27 +12,26 @@ const GlobalStyle = createGlobalStyle`
         background-size: cover !important;
         background-position: center !important;
         background-repeat: no-repeat !important;
+        /* background-color: white !important; */
         width: 100vw !important;
         height: 100vh !important;
         margin: 0 !important;
         padding: 0 !important;
-        font-family: "Nefelibata", cursive !important;
-        .title{
-            font-family: 'GreatVibes';
-
-        }
+        font-family: "Leckerli One", cursive !important;
+        font-size: 20px;
+        color: #747567;
     }
 
     .content-invitation, .input-confirmation {
-        background: url(${backgroundImage}) no-repeat center center fixed;
+        /* background: url(${""}) no-repeat center center fixed; */
         background-size: cover;
-        font-family: "Nefelibata", cursive;
+        font-family: "Leckerli One", cursive;
         background-attachment: scroll;
     }
     
     button{
         background-size: cover;
-        font-family: "Nefelibata", cursive;
+        font-family: "Leckerli One", cursive;
 
         background: rgb(248, 150, 141);
         color: white;
@@ -64,12 +50,8 @@ const GlobalStyle = createGlobalStyle`
 
     }
     
-    .title {
-        font-family: "GreatVibes", cursive;
-    }
-    
     .logged{
-        background: url(${backgroundImage}) no-repeat center center fixed;
+        /* background: url(${""}) no-repeat center center fixed; */
     }
 
 

@@ -1,12 +1,28 @@
 import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import anillos from "../assets/images/anillos.jpg";
 import { db } from "../firebaseConfig";
 import { useIsMobileListener } from "../listener";
-import { Button, Circle, CloseButton, Container, ContainerContent, ContentCenter, DescriptionText, Flex, Footer, IconsContainer, ImageContent, InputApp, ModalContent, ModalOverlay, TitleContent } from "./styled";
-
+import { ImageCarousel } from "./carouselImage";
+import {
+    Button,
+    Circle,
+    CloseButton,
+    Container,
+    ContainerContent,
+    Flex,
+    Footer,
+    IconsContainer,
+    InputApp,
+    ModalContent,
+    ModalOverlay,
+    TitleContent,
+    WeddingRingForeground,
+    WeddingRingImage
+} from "./styled";
+import { WeddingCountdown } from "./WeddingCountdown";
+import weddingRings from "../assets/images/wedding-rings-o.jpg";
 export interface ConfirmedDataState {
-    id:string;
+    id: string;
     nombre: string;
     asiste: boolean;
     fechaConfirmacion: any;
@@ -159,21 +175,28 @@ export default function Invitacion() {
                     </ModalContent>
                 </ModalOverlay>
             )}
-            <TitleContent className={`${isMobile ? "isMobile" : ""} title`}>
-                <span>Juan Camilo Rincón</span>
-                <div className="row">
-                    <span className="mr-2">&</span>
-                    <span className="mt-1">Laura Córdoba</span>
-                </div>
+            <Flex padding={10} column alignCenter justifyCenter style={{ position: "relative", overflow: "hidden" }}>
+                <WeddingRingImage src={weddingRings} alt="Anillos de boda difuminados" />
+                <WeddingRingForeground src={weddingRings} alt="Anillos de boda" />
+            </Flex>
+
+            <TitleContent className={`${isMobile ? "isMobile" : ""}`}>
+                <Flex gap15 className="names">
+                    <span className="bride-name">Mariana</span>
+                    <span className="ampersand">&</span>
+                    <span className="groom-name">Cristian</span>
+                </Flex>
             </TitleContent>
-            <div >
-                <ImageContent src={anillos} alt="anillos" className={isMobile ? "isMobile" : ""} />
-            </div>
-            <ContentCenter className={isMobile ? "isMobile" : ""}>
-                <span>
-                    Nos sentimos muy felices de compartir nuestro matrimonio con la bendición de Dios y deseamos que seas partícipe de este día tan especial.
-                </span>
-            </ContentCenter>
+            <Flex column gap10 alignCenter justifyCenter maxWidth={320} style={{ textAlign: "center", margin: "0 auto" }}>
+                <span>¡Nos casamos! </span>
+                <span> Estamos felices de comenzar esta nueva aventura juntos y queremos celebrarlo contigo. </span>
+            </Flex>
+
+
+            <ImageCarousel />
+            <WeddingCountdown />
+
+
 
             <IconsContainer className={isMobile ? "isMobile" : ""}>
                 <Flex w100 column gap={20} className="icons" padding={20} borderRadius={10}>
@@ -244,14 +267,14 @@ export default function Invitacion() {
             </Flex>
 
             <ContainerContent className={isMobile ? "isMobile" : ""}>
-                <DescriptionText className={isMobile ? "isMobile" : ""}>El color blanco se reserva para la novia</DescriptionText>
+                <span>El color blanco se reserva para la novia</span>
             </ContainerContent>
             {/* <ContainerContent className={isMobile ? "isMobile" : ""}> */}
-            <ContentCenter className={isMobile ? "isMobile" : ""}>
+            <Flex alignCenter justifyCenter maxWidth={500}>
                 <span>
                     “No me ruegues que te deje y que me aparte de ti, porque a dondequiera que tú vayas, yo iré; y dondequiera que tú vivas, yo viviré. Tu pueblo será mi pueblo, y tu Dios será mi Dios.”
                 </span>
-            </ContentCenter>
+            </Flex>
             <Footer>
                 <Flex>
                     -

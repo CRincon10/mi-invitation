@@ -135,7 +135,7 @@ export const Container = styled.div`
     align-items: center;
     flex-direction: column;
     background-position: center;
-    gap: 30px;
+    gap: 20px;
 
     .mr-1 {
         margin-right: 10px;
@@ -176,9 +176,7 @@ export const Container = styled.div`
 `;
 
 export const TitleContent = styled.div`
-    margin-top: 60px;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     font-size: 60px;
@@ -187,15 +185,98 @@ export const TitleContent = styled.div`
     text-align: center;
     animation: ${fadeInLeft} 0.8s ease-out;
     contain: layout;
+    flex-direction: column;
+    font-family: "Satisfy";
+    margin-top: 20px;
 
     &.isMobile {
-        font-size: 53px;
-        margin-top: 350px;
+        font-size: 50px;
+        margin-top: 30px;
+        font-weight: 500;
     }
 `;
 
+export const WeddingRingImage = styled.img`
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    opacity: 0.6;
+    filter: blur(80px) brightness(1.1) saturate(1.2) sepia(0.15);
+    border-radius: 18px;
+    transition: all 0.5s ease-in-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+`;
+
+export const WeddingRingForeground = styled.img`
+    width: 380px;
+    height: auto;
+    object-fit: contain;
+    opacity: 0.95;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));
+    z-index: 1;
+    position: relative;
+    border-radius: 5px;
+`;
+
 export const ImageContent = styled.img`
-    width: 150px;
+    width: 100%;
+    height: 400px; // Puedes ajustar esta altura según tu diseño
+    object-fit: cover;
+    border-radius: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    opacity: 0.9;
+    filter: brightness(1.06) saturate(1.1) sepia(0.08);
+`;
+
+export const CarouselWrapper = styled.div`
+    position: relative;
+    width: 100%;
+    height: 360px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+`;
+
+export const Slide = styled.img<{ position: "prev" | "current" | "next" | "hidden" }>`
+    position: absolute;
+    width: 240px;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+
+    ${({ position }) => {
+        switch (position) {
+            case "current":
+                return `
+          transform: translateX(0) scale(1);
+          z-index: 3;
+          opacity: 1;
+        `;
+            case "prev":
+                return `
+          transform: translateX(-180px) translateY(20px) scale(0.85);
+          z-index: 2;
+          opacity: 0.5;
+        `;
+            case "next":
+                return `
+          transform: translateX(180px) translateY(20px) scale(0.85);
+          z-index: 2;
+          opacity: 0.5;
+        `;
+            default:
+                return `
+          opacity: 0;
+          pointer-events: none;
+        `;
+        }
+    }}
 `;
 
 export const ContainerContent = styled.div`
@@ -204,36 +285,10 @@ export const ContainerContent = styled.div`
     align-items: center;
     justify-content: center;
     text-align: center;
-    font-size: 30px;
     color: #747567;
     width: 100%;
     animation: ${fadeInLeft} 0.8s ease-out;
     contain: layout;
-    &.isMobile {
-        font-size: 24px;
-    }
-`;
-
-export const DescriptionText = styled.span`
-    font-size: 24px;
-    &.isMobile {
-        font-size: 18px;
-    }
-`;
-
-export const ContentCenter = styled.div`
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    max-width: 500px;
-    color: #747567;
-    font-size: 30px;
-    contain: layout;
-
-    &.isMobile {
-        font-size: 28px;
-        max-width: 340px;
-    }
 `;
 
 export const ContentIcons = styled.div`
@@ -260,24 +315,20 @@ export const Button = styled.button`
     padding: 10px 20px;
     border-radius: 8px;
     width: 100%;
-    font-size: 22px;
     cursor: pointer;
     margin-top: 20px;
     transition: background 0.3s;
-    
-    &.small{
+
+    &.small {
         padding: 0px !important;
         margin: 0px;
         background: #b19776;
-        font-size: 18px;
     }
 
     &:hover {
         background: #e65c50;
-        
-        &.small{
-            background:rgb(138, 117, 90);
-
+        &.small {
+            background: rgb(138, 117, 90);
         }
     }
 
@@ -296,7 +347,6 @@ export const IconsContainer = styled.div`
     width: 500px;
 
     .custom-icon {
-        font-size: 40px;
         color: #b19776;
     }
 
@@ -305,24 +355,18 @@ export const IconsContainer = styled.div`
         color: #747567;
     }
 
-    span {
-        font-size: 24px;
-    }
+  
 
     .icons {
-        /* border: 2px solid #b19776; */
     }
 
     &.isMobile {
         width: 100%;
-        /* padding: 0px 40px; */
         .custom-icon,
         .secondary-icons {
-            font-size: 40px;
         }
 
         span {
-            font-size: 20px;
         }
     }
 `;
@@ -367,7 +411,6 @@ export const CloseButton = styled.div`
     width: 100%;
     background: none;
     border: none;
-    font-size: 20px;
     cursor: pointer;
     color: #b19776;
 `;
@@ -394,7 +437,6 @@ export const Circle = styled.div<CircleProps>`
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 16px;
     font-weight: bold;
     color: ${({ selected }) => (selected ? "white" : "#b19776")};
     background: ${({ selected }) => (selected ? "#b19776" : "white")};
@@ -407,8 +449,7 @@ export const InputApp = styled.input`
     margin-top: 10px;
     border: 1px solid #b19776;
     border-radius: 5px;
-    font-size: 20px;
-    font-family: "Nefelibata", cursive;
+    font-family: "Leckerli One", cursive;
     background-size: cover;
 `;
 
@@ -479,8 +520,8 @@ export const SelectWrapper = styled.div`
 export const StyledSelect = styled.select`
     width: 100%;
     padding: 10px;
-    
-    background-color: #fff;
+
+    /* background-color: #fff; */
     appearance: none;
     cursor: pointer;
     outline: none;
@@ -492,13 +533,13 @@ export const StyledSelect = styled.select`
     border: 1px solid #b19776;
     color: #747567;
     border-radius: 5px;
-    font-size: 20px;
-    font-family: "Nefelibata", cursive;
+    /* font-size: 20px; */
+    /* font-family: "Leckerli One", cursive;; */
     background-size: cover;
 `;
 
 export const StyledOption = styled.option`
-    font-size: 18px;
+    /* font-size: 18px; */
 `;
 
 export const IconWrapper = styled.div`
