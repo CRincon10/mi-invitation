@@ -188,7 +188,7 @@ export default function Invitacion() {
             </Flex>
             <WeddingCountdown />
             <ContentInfo className={isMobile ? "isMobile" : ""}>
-                <span className=" bold">Ceremonia</span>
+                <span style={{paddingTop: "20px", paddingBottom: "20px"}} className=" bold">Ceremonia</span>
                 <Flex gap15 alignCenter >
                     <span style={{ fontSize: "35px" }} className="fa-regular fa-calendar " />
                     <span className=" text-small">Sábado 01 de Noviembre </span>
@@ -210,7 +210,7 @@ export default function Invitacion() {
                         </Flex>
                     </a>
                 </Flex>
-                    <span className="mt-2 bold">Recepción</span>
+                    <span style={{paddingTop: "20px", paddingBottom: "20px"}} className="mt-2 bold">Recepción</span>
                     <Flex alignCenter gap15>
                         <span style={{ fontSize: "28px" }} className="fa-solid fa-martini-glass-empty" />
                         <span className="text-small">Centro de eventos envigado</span>
@@ -227,7 +227,7 @@ export default function Invitacion() {
                             style={{ textDecoration: "none", color: "inherit" }}
                         >
                             <Flex alignCenter gap20 cursorPointer>
-                                <span style={{ fontSize: "28px" }} className="fa-regular fa-location-dot" />
+                                <span style={{ fontSize: "28px" }} className="fa-solid fa-play" />
                                 <span className="text-small" style={{ textDecoration: "underline" }}>Cl 48C Sur # 6, Zona 7, Envigado, Antioquia</span>
                             </Flex>
                         </a>
@@ -245,7 +245,7 @@ export default function Invitacion() {
                     “El amor es una parte del alma misma, es de la misma naturaleza que ella, es una chispa divina; como ella, es incorruptible, indivisible, imperecedero. Es una partícula de fuego que está en nosotros, que es inmortal e infinita, a la cual nada puede limitar, ni amortiguar”.
                 </span>
             </Flex>
-            <Footer style={{ backgroundColor: "#fefefe" }}>
+            <Footer>
                 <Flex column alignCenter justifyCenter gap={10}>
                     <img
                         src={family}
@@ -253,7 +253,6 @@ export default function Invitacion() {
                         style={{
                             maxWidth: "100%",
                             width: "400px",
-                            // borderRadius: "12px",
                             boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
                             objectFit: "cover"
                         }}

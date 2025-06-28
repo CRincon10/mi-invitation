@@ -344,7 +344,7 @@ export const Button = styled.button`
 export const ContentInfo = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 30px;
     justify-content: space-between;
     width: 500px;
 
@@ -364,7 +364,6 @@ export const ContentInfo = styled.div`
 
 export const Footer = styled.div`
     display: flex;
-    min-height: 300px;
 `;
 
 export const ModalOverlay = styled.div`
