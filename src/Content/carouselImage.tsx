@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import { useEffect, useState } from "react";
 import imageHeader from "../assets/images/image-header.jpg";
 import imageHeader2 from "../assets/images/image-header2.jpg";
 import imageHeader3 from "../assets/images/image-header3.jpg";
 import imageHeader6 from "../assets/images/image-header6.jpg";
+import { Flex } from "./styled";
 
 import { CarouselWrapper, Slide } from "./styled";
 // Lista de imágenes
@@ -31,15 +31,20 @@ export const ImageCarousel = () => {
     };
 
     return (
-        <CarouselWrapper>
-            {images.map((img, i) => (
-                <Slide
-                    key={i}
-                    src={img}
-                    alt={`slide-${i}`}
-                    position={getPosition(i)}
-                />
-            ))}
-        </CarouselWrapper>
+        <Flex column w100>
+            <CarouselWrapper>
+                {images.map((img, i) => (
+                    <Slide
+                        key={i}
+                        src={img}
+                        alt={`slide-${i}`}
+                        position={getPosition(i)}
+                    />
+                ))}
+            </CarouselWrapper>
+            <Flex alignCenter justifyCenter>
+                <span>01.11.2025</span>
+            </Flex>
+        </Flex>
     );
 };

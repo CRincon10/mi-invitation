@@ -17,21 +17,21 @@ const GlobalStyle = createGlobalStyle`
         height: 100vh !important;
         margin: 0 !important;
         padding: 0 !important;
-        font-family: "Leckerli One", cursive !important;
-        font-size: 20px;
+        font-family: "Lora" !important;
+        font-size: 24px;
         color: #747567;
     }
 
     .content-invitation, .input-confirmation {
         /* background: url(${""}) no-repeat center center fixed; */
         background-size: cover;
-        font-family: "Leckerli One", cursive;
+        font-family: "Lora";
         background-attachment: scroll;
     }
     
     button{
         background-size: cover;
-        font-family: "Leckerli One", cursive;
+        font-family: "Lora";
 
         background: rgb(248, 150, 141);
         color: white;

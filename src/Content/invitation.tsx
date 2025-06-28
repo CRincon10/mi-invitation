@@ -8,19 +8,15 @@ import {
     Circle,
     CloseButton,
     Container,
-    ContainerContent,
+    ContentInfo,
     Flex,
     Footer,
-    IconsContainer,
     InputApp,
     ModalContent,
     ModalOverlay,
-    TitleContent,
-    WeddingRingForeground,
-    WeddingRingImage
+    TitleContent
 } from "./styled";
 import { WeddingCountdown } from "./WeddingCountdown";
-import weddingRings from "../assets/images/wedding-rings-o.jpg";
 export interface ConfirmedDataState {
     id: string;
     nombre: string;
@@ -175,11 +171,7 @@ export default function Invitacion() {
                     </ModalContent>
                 </ModalOverlay>
             )}
-            <Flex padding={10} column alignCenter justifyCenter style={{ position: "relative", overflow: "hidden" }}>
-                <WeddingRingImage src={weddingRings} alt="Anillos de boda difuminados" />
-                <WeddingRingForeground src={weddingRings} alt="Anillos de boda" />
-            </Flex>
-
+            <ImageCarousel />
             <TitleContent className={`${isMobile ? "isMobile" : ""}`}>
                 <Flex gap15 className="names">
                     <span className="bride-name">Mariana</span>
@@ -187,90 +179,65 @@ export default function Invitacion() {
                     <span className="groom-name">Cristian</span>
                 </Flex>
             </TitleContent>
-            <Flex column gap10 alignCenter justifyCenter maxWidth={320} style={{ textAlign: "center", margin: "0 auto" }}>
+            <Flex column gap10 alignCenter justifyCenter maxWidth={340} style={{ textAlign: "center", margin: "0 auto" }}>
                 <span>¡Nos casamos! </span>
-                <span> Estamos felices de comenzar esta nueva aventura juntos y queremos celebrarlo contigo. </span>
+                <span> Estamos felices de comenzar esta nueva etapa juntos y queremos celebrarlo contigo. </span>
             </Flex>
-
-
-            <ImageCarousel />
             <WeddingCountdown />
-
-
-
-            <IconsContainer className={isMobile ? "isMobile" : ""}>
-                <Flex w100 column gap={20} className="icons" padding={20} borderRadius={10}>
-                    <span className="color-gold" style={{ fontSize: "30px", fontWeight: "500" }}>Ceremonia</span>
-                    <Flex column gap10 alignCenter w100 h100 minHeight={180}>
-                        <i className="fa-regular fa-calendar custom-icon" />
-                        <Flex flexWrap justifyCenter textAlignCenter>
-                            <span className="color-gold">Domingo 01 de Junio 2025</span>
-                        </Flex>
-                    </Flex>
-                    <Flex w100 h100 minHeight={180}>
-                        <a
-                            href="https://maps.google.com?q=Carrera+40A+46E+Sur+Envigado,+Antioquia"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{ textDecoration: "none", color: "inherit" }} // Evita cambios de estilo no deseados
-                        >
-                            <Flex column alignCenter justifyCenter gap10 cursorPointer h100 minHeight={150}>
-                                <i className="fa-solid fa-church custom-icon" />
-                                <Flex flexWrap justifyCenter alignCenter style={{ textAlign: "center" }}>
-                                    <span style={{ color: "#b19776", textDecoration: "underline" }}>Parroquia San Ignacio de Antioquia - Carrera 40A  46E Sur.</span>
-                                </Flex>
-                            </Flex>
-                        </a>
-                    </Flex>
-                    <Flex column justifyCenter gap10 alignCenter w100 h100 >
-                        <i className="fa-regular fa-clock custom-icon" />
-                        <Flex flexWrap justifyCenter textAlignCenter>
-                            <span className="color-gold">2:30 pm</span>
-                        </Flex>
-                    </Flex>
+            <ContentInfo className={isMobile ? "isMobile" : ""}>
+                <span className=" bold">Ceremonia</span>
+                <Flex gap15 alignCenter >
+                    <span style={{ fontSize: "35px" }} className="fa-regular fa-calendar " />
+                    <span className=" text-small">Sábado 01 de Noviembre </span>
                 </Flex>
-                <Flex w100 column gap={20} className="icons" padding={20} borderRadius={10}>
-                    <span className="color-app" style={{ fontSize: "30px", fontWeight: "500" }}>Brindis</span>
-                    <Flex column alignCenter justifyCenter gap10 w100 h100 minHeight={160}>
-                        <i className="fa-solid fa-martini-glass-empty secondary-icons"></i>
-                        <Flex w100 flexWrap justifyCenter alignCenter style={{ textAlign: "center" }}>
-                            <span className="color-app">Esclavas Misioneras del Santísimo Sacramento</span>
+                <Flex alignCenter gap15 >
+                    <span style={{ fontSize: "30px" }} className="fa-regular fa-clock " />
+                    <span className=" text-small">4:00 pm</span>
+                </Flex>
+                <Flex gap10 alignCenter>
+                    <a
+                        href="https://www.google.com/maps/place/Parroquia+Santa+Mar%C3%ADa+de+Los+%C3%81ngeles/@6.1909884,-75.58416,17z/data=!3m1!4b1!4m6!3m5!1s0x8e468360f9758e77:0x6f0e4b95b313d3c1!8m2!3d6.1909831!4d-75.5792891!16s%2Fg%2F1tc_547g?entry=ttu&g_ep=EgoyMDI1MDYyMy4yIKXMDSoASAFQAw%3D%3D"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ textDecoration: "none", color: "inherit" }} // Evita cambios de estilo no deseados
+                    >
+                        <Flex alignCenter gap10 cursorPointer>
+                            <span style={{ fontSize: "28px" }} className="fa-solid fa-church " />
+                            <span className=" text-small" style={{ textDecoration: "underline" }}>Parroquia Santa Maria de los Angeles - Poblado.</span>
                         </Flex>
+                    </a>
+                </Flex>
+                    <span className="mt-2 bold">Recepción</span>
+                    <Flex alignCenter gap15>
+                        <span style={{ fontSize: "28px" }} className="fa-solid fa-martini-glass-empty" />
+                        <span className="text-small">Centro de eventos envigado</span>
                     </Flex>
-                    <Flex w100 h100 minHeight={200}>
+                    <Flex gap20 alignCenter>
+                        <span style={{ fontSize: "28px" }}  className="fa-regular fa-clock" />
+                        <span className="text-small">7:00 pm</span>
+                    </Flex>
+                    <Flex gap10 alignCenter>
                         <a
-                            href="https://maps.google.com?q=Cl+48C+Sur+%23+6,+Zona+7,+Envigado,+Antioquia"
+                            href="https://www.google.com/maps?rlz=1C1RXQR_enCO1122CO1122&vet=12ahUKEwiKkYD5z5OOAxXpSzABHTywNf4Q8UF6BAgkEAM..i&lei=5p1faIqGJemXwbkPvODW8Q8&cs=0&um=1&ie=UTF-8&fb=1&gl=co&sa=X&geocode=KY26xciCg0aOMR5BweR5ReJ7&daddr=Cl.+40+Sur+%2324-13,+Zona+6,+Envigado,+Antioquia"
                             target="_blank"
                             rel="noopener noreferrer"
                             style={{ textDecoration: "none", color: "inherit" }}
                         >
-                            <Flex column marginTop={10} alignCenter gap10 cursorPointer h100>
-                                <i className="fa-regular fa-location-dot secondary-icons" />
-                                <Flex flexWrap justifyCenter alignCenter style={{ textAlign: "center" }} >
-                                    <span style={{ color: "#747567", textDecoration: "underline" }}>Cl 48C Sur # 6, Zona 7, Envigado, Antioquia</span>
-                                </Flex>
+                            <Flex alignCenter gap20 cursorPointer>
+                                <span style={{ fontSize: "28px" }} className="fa-regular fa-location-dot" />
+                                <span className="text-small" style={{ textDecoration: "underline" }}>Cl 48C Sur # 6, Zona 7, Envigado, Antioquia</span>
                             </Flex>
                         </a>
                     </Flex>
-                    <Flex column justifyCenter gap10 alignCenter w100 h100 >
-                        <i className="fa-regular fa-clock secondary-icons" />
-                        <Flex flexWrap justifyCenter textAlignCenter>
-                            <span className="color-app">5:00 pm</span>
-                        </Flex>
-                    </Flex>
-                </Flex>
-            </IconsContainer>
+                    
+            </ContentInfo>
             <Flex w100 padding={20}>
                 <Button onClick={() => setOpenConfirm(true)} className="button">
                     <span>Confirmar asistencia</span>
                 </Button>
             </Flex>
 
-            <ContainerContent className={isMobile ? "isMobile" : ""}>
-                <span>El color blanco se reserva para la novia</span>
-            </ContainerContent>
-            {/* <ContainerContent className={isMobile ? "isMobile" : ""}> */}
-            <Flex alignCenter justifyCenter maxWidth={500}>
+            <Flex alignCenter justifyCenter maxWidth={500} padding={20}>
                 <span>
                     “No me ruegues que te deje y que me aparte de ti, porque a dondequiera que tú vayas, yo iré; y dondequiera que tú vivas, yo viviré. Tu pueblo será mi pueblo, y tu Dios será mi Dios.”
                 </span>

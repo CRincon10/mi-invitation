@@ -170,8 +170,11 @@ export const Container = styled.div`
     .underline {
         text-decoration: "underline";
     }
-    .small {
-        font-size: 16px;
+    .text-small {
+        font-size: 20px;
+    }
+    .bold {
+        font-weight: bold;
     }
 `;
 
@@ -191,7 +194,7 @@ export const TitleContent = styled.div`
 
     &.isMobile {
         font-size: 50px;
-        margin-top: 30px;
+        margin-top: 20px;
         font-weight: 500;
     }
 `;
@@ -215,7 +218,7 @@ export const WeddingRingForeground = styled.img`
     height: auto;
     object-fit: contain;
     opacity: 0.95;
-    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
     z-index: 1;
     position: relative;
     border-radius: 5px;
@@ -338,12 +341,11 @@ export const Button = styled.button`
     }
 `;
 
-export const IconsContainer = styled.div`
+export const ContentInfo = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 20px;
     justify-content: space-between;
-    padding: 20px 20px 0px 20px;
     width: 500px;
 
     .custom-icon {
@@ -351,23 +353,12 @@ export const IconsContainer = styled.div`
     }
 
     .secondary-icons {
-        font-size: 40px;
         color: #747567;
-    }
-
-  
-
-    .icons {
     }
 
     &.isMobile {
         width: 100%;
-        .custom-icon,
-        .secondary-icons {
-        }
-
-        span {
-        }
+        padding: 20px;
     }
 `;
 
