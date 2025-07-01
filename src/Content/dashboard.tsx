@@ -1,12 +1,13 @@
 import { addDoc, collection, getDocs, serverTimestamp } from "firebase/firestore";
+import moment from "moment";
 import { useEffect, useState } from "react";
 import { logoutUser } from "../firebase/functions";
 import { db } from "../firebaseConfig";
 import FilterToggle from "../inputs/toggle";
-import { ConfirmedDataState } from "./invitation";
-import { Button, CloseButton, ConfirmacionesContainer, ContainerLogged, Flex, IconWrapper, InputApp, ModalContent, ModalOverlay, SelectWrapper, StyledOption, StyledSelect } from "./styled";
-import moment from "moment";
 import { useIsMobileListener } from "../listener";
+import { ConfirmedDataState } from "./confirmation";
+import { Modal } from "./modal/modal";
+import { Button, ConfirmacionesContainer, ContainerLogged, Flex, IconWrapper, InputApp, SelectWrapper, StyledOption, StyledSelect } from "./styled";
 
 export const Dashboard = () => {
     const [confirmaciones, setConfirmaciones] = useState<ConfirmedDataState[]>([]);
@@ -87,12 +88,9 @@ export const Dashboard = () => {
     return (
         <ContainerLogged className="logged">
             {showManualForm && (
-                <ModalOverlay className={isMobile ? "isMobile" : ""} onClick={() => setShowManualForm(false)}>
+                <Modal isOpen={showManualForm} onClose={() => setShowManualForm(false)} >
 
-                    <ModalContent onClick={(e) => e.stopPropagation()}>
-                        <Flex paddingRight={5}>
-                            <CloseButton onClick={() => setShowManualForm(false)}>✖</CloseButton>
-                        </Flex>
+                    <Flex onClick={(e) => e.stopPropagation()}>
                         <Flex column paddingRight={20} paddingBottom={50} paddingLeft={20} spaceBetween>
                             <Flex column gap20>
                                 <form onSubmit={handleManualAdd}>
@@ -115,8 +113,8 @@ export const Dashboard = () => {
                                 </form>
                             </Flex>
                         </Flex>
-                    </ModalContent>
-                </ModalOverlay>
+                    </Flex>
+                </Modal>
             )}
             <h1 style={{ textAlign: "center", marginBottom: "20px", fontSize: "28px", color: "#b19776" }}>
                 Panel de Confirmaciones

@@ -3,8 +3,9 @@ import imageHeader from "../assets/images/image-header.jpg";
 import imageHeader2 from "../assets/images/image-header2.jpg";
 import imageHeader3 from "../assets/images/image-header3.jpg";
 import imageHeader5 from "../assets/images/image-header5.jpg";
-import { Flex } from "./styled";
+import { SubTitleWrapper, TitleWrapper, Wrapper } from "./styled";
 
+import HeartLineComponent from "./heartLine";
 import { CarouselWrapper, Slide } from "./styled";
 // Lista de imágenes
 const images = [imageHeader, imageHeader2, imageHeader3, imageHeader5];
@@ -31,7 +32,9 @@ export const ImageCarousel = () => {
     };
 
     return (
-        <Flex column w100>
+        <Wrapper>
+            <HeartLineComponent />
+            <SubTitleWrapper>Nuestros momentos</SubTitleWrapper>
             <CarouselWrapper>
                 {images.map((img, i) => (
                     <Slide
@@ -42,9 +45,7 @@ export const ImageCarousel = () => {
                     />
                 ))}
             </CarouselWrapper>
-            <Flex alignCenter justifyCenter>
-                <span className="text-small">Medellín / 01.11.2025</span>
-            </Flex>
-        </Flex>
+            <HeartLineComponent />
+        </Wrapper>
     );
 };

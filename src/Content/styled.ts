@@ -199,6 +199,40 @@ export const TitleContent = styled.div`
     }
 `;
 
+export const Divider = styled.div`
+    flex: 1;
+    height: 1px;
+    background: #b19776;
+    margin: 0 12px;
+`;
+
+export const Wrapper = styled.div`
+    width: 100vw;
+    background: #fef9f6;
+    margin: 20px auto;
+    padding: 0 20px ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    .button-calendar{
+        margin-top: 30px ;
+    }
+`;
+
+export const TitleWrapper = styled.h2`
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 20px;
+`;
+
+export const SubTitleWrapper = styled.h2`
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 20px;
+`;
+
 export const WeddingRingImage = styled.img`
     width: 100%;
     height: auto;
@@ -341,68 +375,8 @@ export const Button = styled.button`
     }
 `;
 
-export const ContentInfo = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    justify-content: space-between;
-    width: 500px;
-
-    .custom-icon {
-        color: #b19776;
-    }
-
-    .secondary-icons {
-        color: #747567;
-    }
-
-    &.isMobile {
-        width: 100%;
-        padding: 20px;
-    }
-`;
-
 export const Footer = styled.div`
     display: flex;
-`;
-
-export const ModalOverlay = styled.div`
-    position: fixed;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    padding-top: 10px;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    z-index: 1000;
-
-    &.isMobile {
-        padding-top: 20px;
-    }
-`;
-
-export const ModalContent = styled.div`
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
-    text-align: center;
-    width: 380px;
-    min-height: 400px;
-    max-height: 90vh;
-    overflow-y: auto;
-    border: 2px solid #b19776;
-`;
-
-export const CloseButton = styled.div`
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    width: 100%;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #b19776;
 `;
 
 export const OptionsContainer = styled.div`

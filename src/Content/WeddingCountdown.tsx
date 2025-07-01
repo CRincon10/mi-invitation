@@ -1,48 +1,42 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { Flex } from "./styled";
 
 const CountdownContainer = styled.div`
-    text-align: center;
-    padding: 30px 20px;
-    background-color: #fefaf6;
-    border-radius: 16px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
-    margin-top: 20px;
-    margin-bottom: 20px;
-    gap: 20px;
-`;
-
-const Title = styled.div`
-    color: #b19776;
-    font-weight: bold;
-    margin-bottom: 20px;
+  width: 100vw;
+  padding: 40px 20px;
+  background-color: #1f2c4d;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-family: 'Lora', serif;
 `;
 
 const TimeBox = styled.div`
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
 `;
 
 const TimeUnit = styled.div`
-    background-color: #fff;
-    border-radius: 12px;
-    padding: 18px;
-    min-width: 80px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    text-align: center;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 12px;
+  min-width: 70px;
+  text-align: center;
 `;
 
 const Number = styled.div`
-    font-size: 24px;
-    font-weight: bold;
-    color: #b19776;
+  font-size: 32px;
+  font-weight: bold;
+  color: #b99d79;
 `;
 
 const Label = styled.div`
-    font-size: 14px;
-    color: #747567;
+  font-size: 14px;
+  color: #c2c6d4;
 `;
 
 export const WeddingCountdown = () => {
@@ -57,6 +51,7 @@ export const WeddingCountdown = () => {
             days: Math.floor(difference / (1000 * 60 * 60 * 24)),
             hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
             minutes: Math.floor((difference / (1000 * 60)) % 60),
+            seconds: Math.floor((difference / 1000) % 60),
         };
     };
 
@@ -73,15 +68,15 @@ export const WeddingCountdown = () => {
     if (!timeLeft) {
         return (
             <CountdownContainer>
-                <Title>¡Ya llegó el gran día! 💍</Title>
-                {/*TODO:// Agregar imagen de anillos  */}
+                <span style={{ fontSize: "30px", fontWeight: 'bold', color: "#b99d79" }}>
+                    ¡Ya llegó el gran día! 💍
+                </span>
             </CountdownContainer>
         );
     }
 
     return (
         <CountdownContainer>
-            <Title>Nuestra boda será en:</Title>
             <TimeBox>
                 <TimeUnit>
                     <Number>{timeLeft.days}</Number>
@@ -93,10 +88,18 @@ export const WeddingCountdown = () => {
                 </TimeUnit>
                 <TimeUnit>
                     <Number>{timeLeft.minutes}</Number>
-                    <Label>Minutos</Label>
+                    <Label>Min</Label>
                 </TimeUnit>
-
+                <TimeUnit>
+                    <Number>{timeLeft.seconds}</Number>
+                    <Label>Seg</Label>
+                </TimeUnit>
             </TimeBox>
+            <Flex marginTop={30}>
+                <span style={{ fontSize: "30px", fontWeight: 'bold', color: "#b99d79" }}>
+                    ¡Los Esperamos!
+                </span>
+            </Flex>
         </CountdownContainer>
     );
 };

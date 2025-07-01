@@ -1,6 +1,5 @@
 import { createGlobalStyle } from "styled-components";
 
-
 const GlobalStyle = createGlobalStyle`
     * {
         margin: 0;
@@ -29,26 +28,22 @@ const GlobalStyle = createGlobalStyle`
         background-attachment: scroll;
     }
     
-    button{
-        background-size: cover;
-        font-family: "Lora";
-
-        background: rgb(248, 150, 141);
+    button {
+        background-color: #b68e74;
         color: white;
         border: none;
-        padding: 10px 20px;
+        padding: 14px 26px;
+        font-size: 17px;
         border-radius: 8px;
-        width: 100%;
-        font-size: 22px;
         cursor: pointer;
-        margin-top: 20px;
-        transition: background 0.3s;
+        font-family: inherit;
+        transition: all 0.3s;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 
         &:hover {
-            background: #e65c50;
+            background-color: #a07a62;
+  }
         }
-
-    }
     
     .logged{
         /* background: url(${""}) no-repeat center center fixed; */
