@@ -16,7 +16,7 @@ const Line = styled.div`
 `;
 
 const Heart = styled.span`
-    font-size: 13px;
+    font-size: 10px;
     padding: 0 4px; /* espaciado entre línea y corazón */
     color: #747567; /* color del corazón */
 `;
@@ -25,13 +25,13 @@ export default function HeartLineComponent() {
     return (
         <HeartLine>
             <Line />
-            <Heart>♥</Heart>
+            <Heart><span className="fas fa-heart" /></Heart>
             <Line />
-            <Heart>♥</Heart>
+            <Heart><span className="fas fa-heart" /></Heart>
             <Line />
-            <Heart>♥</Heart>
+            <Heart><span className="fas fa-heart" /></Heart>
             <Line />
-            <Heart>♥</Heart>
+            <Heart><span className="fas fa-heart" /></Heart>
             <Line />
         </HeartLine>
     );

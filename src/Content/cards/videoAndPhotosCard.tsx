@@ -2,7 +2,7 @@ import { QRCodeSVG } from 'qrcode.react';
 import { useState } from 'react';
 import { Modal } from '../modal/modal';
 import { Flex } from '../styled';
-import { Button, Card, Info, Label, Title } from './styled';
+import { Button, Card, Info, Label, SubTitle } from './styled';
 
 export const VideoAndPhotosCard = () => {
     const [showModal, setShowModal] = useState(false);
@@ -13,7 +13,7 @@ export const VideoAndPhotosCard = () => {
         <>
             <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
                 <Flex column padding={20} gap={20} alignCenter justifyCenter>
-                    <Title>Escanea este código QR</Title>
+                    <SubTitle>Escanea este código QR</SubTitle>
                     <QRCodeSVG
                         value={uploadLink}
                         size={200}
@@ -29,7 +29,7 @@ export const VideoAndPhotosCard = () => {
             </Modal>
 
             <Card>
-                <Title>Comparte tus Fotos y videos de la boda aquí</Title>
+                <SubTitle>Comparte tus Fotos y videos de la boda aquí</SubTitle>
                 <Flex alignCenter justifyCenter marginTop={30} marginBottom={30}>
                     <QRCodeSVG
                         value={uploadLink}

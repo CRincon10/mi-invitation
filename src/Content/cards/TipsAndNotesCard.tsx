@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Modal } from '../modal/modal';
 import { Flex } from '../styled';
-import { Button, Card, Info, Label, Title } from './styled';
+import { Button, Card, Info, Label, SubTitle } from './styled';
 
 
 export const TipsAndNotesCard = () => {
@@ -15,9 +15,9 @@ export const TipsAndNotesCard = () => {
                 </Flex>
             </Modal>
             <Card>
-                <Title>Tips y Notas </Title>
+                <SubTitle>Tips y Notas </SubTitle>
                 <Flex alignCenter justifyCenter marginTop={30} marginBottom={30}>
-                    <span className='fas fa-pen-to-square mt-2' style={{fontSize: "40px"}} />
+                    <span className='fas fa-pen-to-square mt-1' style={{fontSize: "40px"}} />
                 </Flex>
                 <Info>
                     <Label>Información adicional para tener en cuenta</Label> 

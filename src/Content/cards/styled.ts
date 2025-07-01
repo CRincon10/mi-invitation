@@ -29,6 +29,14 @@ export const Title = styled.h2`
     margin: 0;
 `;
 
+export const SubTitle = styled.h2`
+    font-size: 25px;
+    color: #f0eae3; /* marfil */
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin: 0;
+`;
+
 export const Info = styled.div`
     font-size: 18px;
     margin: 12px 0;
