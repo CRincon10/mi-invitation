@@ -42,14 +42,8 @@ const GlobalStyle = createGlobalStyle`
 
         &:hover {
             background-color: #a07a62;
-  }
         }
-    
-    .logged{
-        /* background: url(${""}) no-repeat center center fixed; */
     }
-
-
-    `;
+`;
 
 export default GlobalStyle;

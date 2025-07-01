@@ -3,7 +3,7 @@ import imageHeader from "../assets/images/image-header.jpg";
 import imageHeader2 from "../assets/images/image-header2.jpg";
 import imageHeader3 from "../assets/images/image-header3.jpg";
 import imageHeader5 from "../assets/images/image-header5.jpg";
-import { SubTitleWrapper, TitleWrapper, Wrapper } from "./styled";
+import { SubTitleWrapper, Wrapper } from "./styled";
 
 import HeartLineComponent from "./heartLine";
 import { CarouselWrapper, Slide } from "./styled";

@@ -20,7 +20,6 @@ export const Confirmation = () => {
     const [openConfirm, setOpenConfirm] = useState(false);
     const [confirmedData, setConfirmedData] = useState<ConfirmedDataState>();
     const [docId, setDocId] = useState<string | null>(null);
-
     const isMobile = useIsMobileListener();
     const [confirm, setConfirm] = useState<boolean>();
     const [name, setName] = useState("");

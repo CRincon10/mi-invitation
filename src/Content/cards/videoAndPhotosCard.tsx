@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Modal } from '../modal/modal';
-import { Flex, SubTitleWrapper } from '../styled';
-import { Button, Card, Info, Label, Title } from './styled';
 import { QRCodeSVG } from 'qrcode.react';
+import { useState } from 'react';
+import { Modal } from '../modal/modal';
+import { Flex } from '../styled';
+import { Button, Card, Info, Label, Title } from './styled';
 
 export const VideoAndPhotosCard = () => {
     const [showModal, setShowModal] = useState(false);
