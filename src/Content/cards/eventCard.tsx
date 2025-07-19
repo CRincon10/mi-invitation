@@ -31,10 +31,10 @@ export const EventCard: React.FC<EventCardProps> = ({
             <Ribbon>{title}</Ribbon>
             <Divider />
             <Info>
-                <Label>Hora:</Label> {time}
+                <Label>Lugar:</Label> {place}
             </Info>
             <Info>
-                <Label>Lugar:</Label> {place}
+                <Label>Hora:</Label> {time}
             </Info>
             <Button onClick={onButtonClick}>{buttonText}</Button>
         </Card>

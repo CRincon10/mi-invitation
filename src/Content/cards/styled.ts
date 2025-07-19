@@ -66,6 +66,7 @@ export const Button = styled.button`
     transition: background-color 0.3s;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     font-size: 20px !important;
+    font-family: 'Lora', serif;
 
     &:hover {
         background-color: #a78564;

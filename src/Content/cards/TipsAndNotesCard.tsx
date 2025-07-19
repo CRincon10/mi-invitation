@@ -31,7 +31,7 @@ export const TipsAndNotesCard = () => {
                     loop
                     autoplay
                     lottieRef={lottieRef}
-                    style={{ width: 200, height: 100, margin: '0 auto' }}
+                    style={{ width: 100, height: 90, margin: '0 auto' }}
                 />
                 <Info>
                     <Label>Información adicional para tener en cuenta</Label> 
