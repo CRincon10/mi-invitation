@@ -1,10 +1,9 @@
 import styled from 'styled-components';
-import headerGif from '../assets/images/header-image.jpg';
+import headerGif from '../assets/images/hheader-image.jpg';
 
 const HeaderContainer = styled.div<{ hidden: boolean }>`
     width: 100vw;
     height: 500px;
-    padding:10px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -16,7 +15,6 @@ const HeaderImg = styled.img`
     height: 100%;
     object-fit: cover;
     opacity: 0.9;
-    border-radius: 10px;
 `;
 
 export default function HeaderImage() {

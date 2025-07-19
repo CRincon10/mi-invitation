@@ -2,7 +2,9 @@ import { QRCodeSVG } from 'qrcode.react';
 import { useState } from 'react';
 import { Modal } from '../modal/modal';
 import { Flex } from '../styled';
-import { Button, Card, Info, Label, SubTitle } from './styled';
+import { Button, Card, Info, Label, Ribbon, SubTitle } from './styled';
+import Lottie from 'lottie-react';
+import clientList from '../../assets/animations/photo.json';
 
 export const VideoAndPhotosCard = () => {
     const [showModal, setShowModal] = useState(false);
@@ -27,18 +29,16 @@ export const VideoAndPhotosCard = () => {
                     </Button>
                 </Flex>
             </Modal>
-
+            <Flex marginTop={20}></Flex>
             <Card>
-                <SubTitle>Comparte tus Fotos y videos de la boda aquí</SubTitle>
-                <Flex alignCenter justifyCenter marginTop={30} marginBottom={30}>
-                    <QRCodeSVG
-                        value={uploadLink}
-                        size={120}
-                        fgColor="#ffffff"
-                        bgColor="#1a1641"
-                        level="H"
-                    />
-                </Flex>
+                <Ribbon>Fotos y videos</Ribbon>
+                <Flex paddingBottom={20}></Flex>
+                <Lottie
+                    animationData={clientList}
+                    loop
+                    autoplay
+                    style={{ width: 150, height: 70, margin: '0 auto' }}
+                />
                 <Info>
                     <Label>No queremos perdernos ningún momento de este hermoso día</Label>
                 </Info>

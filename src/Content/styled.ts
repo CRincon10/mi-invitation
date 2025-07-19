@@ -128,6 +128,10 @@ export const Flex = styled.div<FlexProps>`
     ${({ cursorPointer }) => cursorPointer && "cursor: pointer;"}
     ${({ textAlignCenter }) => textAlignCenter && "text-align: center;"}
     ${({ textAlignLeft }) => textAlignLeft && "text-align: left;"}
+    //agrega un borde negro en la propiedad border
+    ${({ border }) => border && "border: 1px solid black;"}
+
+    ${({ border }) => border && "border: 1px solid  ;"}
 `;
 
 export const Container = styled.div`
@@ -208,8 +212,7 @@ export const Divider = styled.div`
 
 export const Wrapper = styled.div`
     width: 100vw;
-    background: #fef9f6;
-    margin: 20px auto;
+    margin: auto;
     padding: 0 20px ;
     display: flex;
     flex-direction: column;
@@ -345,38 +348,9 @@ export const Card = styled.div`
     width: 350px;
 `;
 
-export const Button = styled.button`
-    background: rgb(248, 150, 141);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    width: 100%;
-    cursor: pointer;
-    margin-top: 20px;
-    transition: background 0.3s;
-
-    &.small {
-        padding: 0px !important;
-        margin: 0px;
-        background: #b19776;
-    }
-
-    &:hover {
-        background: #e65c50;
-        &.small {
-            background: rgb(138, 117, 90);
-        }
-    }
-
-    &:disabled {
-        cursor: not-allowed;
-        background: rgb(255, 192, 186); /* Mantener el mismo color */
-    }
-`;
-
 export const Footer = styled.div`
     display: flex;
+    padding:10px;
 `;
 
 export const OptionsContainer = styled.div`

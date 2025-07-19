@@ -5,7 +5,7 @@ import { Flex } from "./styled";
 const CountdownContainer = styled.div`
   width: 100vw;
   padding: 40px 20px;
-  background-color: #1f2c4d;
+  background-color: #49594d;
   display: flex;
   flex-direction: column;
   align-items: center;

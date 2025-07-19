@@ -1,8 +1,9 @@
+import Lottie from 'lottie-react';
 import React from 'react';
-import { Button, Card, Divider, IconWrapper, Info, Label, Title } from './styled';
+import { Button, Card, Divider, Info, Label, Ribbon } from './styled';
 
 type EventCardProps = {
-    icon: string;
+    icon: any;
     title: string;
     time: string;
     place: string;
@@ -20,11 +21,14 @@ export const EventCard: React.FC<EventCardProps> = ({
 }) => {
     return (
         <Card>
-            <IconWrapper>
-                <img src={icon} alt="Icono del evento" style={{ width: '100px', height: '120px' }} />
-            </IconWrapper>
+            <Lottie 
+                animationData={icon} 
+                loop 
+                autoplay 
+                style={{ width: 100, height: 120, margin: '0 auto' }} 
+            />
             <Divider />
-            <Title>{title}</Title>
+            <Ribbon>{title}</Ribbon>
             <Divider />
             <Info>
                 <Label>Hora:</Label> {time}

@@ -1,11 +1,21 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Modal } from '../modal/modal';
 import { Flex } from '../styled';
-import { Button, Card, Info, Label, SubTitle } from './styled';
+import { Button, Card, Info, Label, Ribbon } from './styled';
+import Lottie from 'lottie-react';
+import note from '../../assets/animations/note.json';
 
 
 export const TipsAndNotesCard = () => {
+    const lottieRef = useRef(null);
     const [showModal, setShowModal] = useState(false);
+
+    useEffect(() => {
+    if (lottieRef.current) {
+      // @ts-ignore para evitar el error de typings estrictos
+      lottieRef.current.setSpeed(0.5); // velocidad más lenta
+    }
+  }, []);
 
     return (
         <>
@@ -15,10 +25,14 @@ export const TipsAndNotesCard = () => {
                 </Flex>
             </Modal>
             <Card>
-                <SubTitle>Tips y Notas </SubTitle>
-                <Flex alignCenter justifyCenter marginTop={30} marginBottom={30}>
-                    <span className='fas fa-pen-to-square mt-1' style={{fontSize: "40px"}} />
-                </Flex>
+                <Ribbon>Tips y Notas </Ribbon>
+                <Lottie
+                    animationData={note}
+                    loop
+                    autoplay
+                    lottieRef={lottieRef}
+                    style={{ width: 200, height: 100, margin: '0 auto' }}
+                />
                 <Info>
                     <Label>Información adicional para tener en cuenta</Label> 
                 </Info>

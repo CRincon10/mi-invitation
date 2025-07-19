@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import texture from "./assets/images/fondoMatrimonio.jpg";
 
 const GlobalStyle = createGlobalStyle`
     * {
@@ -8,15 +9,16 @@ const GlobalStyle = createGlobalStyle`
     }
   
     body {
-        background-size: cover !important;
-        background-position: center !important;
-        background-repeat: no-repeat !important;
-        /* background-color: white !important; */
-        width: 100vw !important;
-        height: 100vh !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        font-family: "Lora" !important;
+        background-image: url(${texture});
+        background-size: 400px 400px;
+        background-repeat: repeat;
+        background-position: center;
+        background-color: #fffefdff;
+        width: 100vw;
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        font-family: 'Lora', serif;
         font-size: 24px;
         color: #747567;
     }
@@ -36,7 +38,7 @@ const GlobalStyle = createGlobalStyle`
         font-size: 17px;
         border-radius: 8px;
         cursor: pointer;
-        font-family: inherit;
+        font-family: "Lora";
         transition: all 0.3s;
         box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 

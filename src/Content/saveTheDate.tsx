@@ -1,6 +1,9 @@
+import Lottie from 'lottie-react';
 import styled from 'styled-components';
+import heartAnimation from '../assets/animations/WeddingRings.json';
 import HeartLineComponent from './heartLine';
 import { Flex, TitleWrapper, Wrapper } from './styled';
+import { Button } from './cards/styled';
 
 const CalendarGrid = styled.div`
   display: grid;
@@ -39,6 +42,12 @@ export default function SaveTheDateCalendar() {
     return (
         <Wrapper>
             <HeartLineComponent />
+            <Lottie 
+                animationData={heartAnimation} 
+                loop={true} 
+                autoplay={true}
+                style={{ width: 100, height: 100, margin: '0 auto' }}
+            />
             <TitleWrapper>Noviembre</TitleWrapper>
             <CalendarGrid>
                 <DayLabel>Mié</DayLabel><DayLabel>Jue</DayLabel><DayLabel>Vie</DayLabel>
@@ -50,7 +59,7 @@ export default function SaveTheDateCalendar() {
                 <DayCell active>01</DayCell><DayCell>02</DayCell><DayCell>03</DayCell><DayCell>04</DayCell>
             </CalendarGrid>
             <Flex alignCenter justifyCenter marginTop={50}>
-                <button onClick={openGoogleCalendar}>Agregar al calendario</button>
+                <Button onClick={openGoogleCalendar}>Agregar al calendario</Button>
             </Flex>
             <HeartLineComponent />
         </Wrapper>

@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import { Flex, Wrapper, Circle, InputApp } from './styled'
-import HeartLineComponent from './heartLine'
-import { Modal } from './modal/modal'
-import { useIsMobileListener } from '../listener';
-import { db } from "../firebaseConfig";
 import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
+import { useEffect, useState } from 'react';
+import { db } from "../firebaseConfig";
+import { Button } from './cards/styled';
+import HeartLineComponent from './heartLine';
+import { Modal } from './modal/modal';
+import { Circle, Flex, InputApp, Wrapper } from './styled';
 
 
 export interface ConfirmedDataState {
@@ -20,7 +20,6 @@ export const Confirmation = () => {
     const [openConfirm, setOpenConfirm] = useState(false);
     const [confirmedData, setConfirmedData] = useState<ConfirmedDataState>();
     const [docId, setDocId] = useState<string | null>(null);
-    const isMobile = useIsMobileListener();
     const [confirm, setConfirm] = useState<boolean>();
     const [name, setName] = useState("");
     const [companion, setCompanion] = useState("");
@@ -118,7 +117,6 @@ export const Confirmation = () => {
                                                 value={name}
                                                 onChange={(e) => setName(e.target.value)}
                                             />
-                                            {/* Checkbox para confirmar por acompañante */}
                                             <Flex alignCenter gap10>
                                                 <input
                                                     type="checkbox"
@@ -130,8 +128,6 @@ export const Confirmation = () => {
                                                     Confirmar por acompañante
                                                 </label>
                                             </Flex>
-
-                                            {/* Input adicional si se confirma por acompañante */}
                                             {confirmCompanion && (
                                                 <InputApp
                                                     className="input-confirmation"
@@ -151,9 +147,9 @@ export const Confirmation = () => {
                                         }
                                     </Flex>
                                     <Flex>
-                                        <button className={isButtonDisabled ? "disabled" : ""} disabled={isButtonDisabled} onClick={() => handleConfirm()} style={{ marginTop: "20px" }}>
+                                        <Button className={isButtonDisabled ? "disabled" : ""} disabled={isButtonDisabled} onClick={() => handleConfirm()} style={{ marginTop: "20px" }}>
                                             {loading ? "Enviando..." : "Enviar Respuesta"}
-                                        </button>
+                                        </Button>
                                     </Flex>
                                 </Flex>
                             )}
@@ -162,12 +158,12 @@ export const Confirmation = () => {
             )}
 
             <HeartLineComponent />
-            <span style={{ fontSize: "30px", fontWeight: 'bold', marginBottom: "10px" }}>Confirmación</span>
-            <span>Nos acompañas en este dia tan especial?</span>
+            <span className="color-gold" style={{fontFamily: "Satisfy", fontSize: "35px", fontWeight: 'bold', marginBottom: "10px" }}>Confirmación</span>
+            <span  style={{ fontSize: "18px", fontWeight: 'bold' }}>Nos acompañas en este dia tan especial?</span>
             <Flex alignCenter justifyCenter marginTop={30} marginBottom={30}>
                 <span className='fas fa-list' style={{ fontSize: "40px" }} />
             </Flex>
-            <button onClick={() => setOpenConfirm(true)}>Confirmar asistencia</button>
+            <Button onClick={() => setOpenConfirm(true)}>Confirmar asistencia</Button>
             <HeartLineComponent />
         </Wrapper>
     )

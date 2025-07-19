@@ -5,9 +5,10 @@ import { logoutUser } from "../firebase/functions";
 import { db } from "../firebaseConfig";
 import FilterToggle from "../inputs/toggle";
 import { useIsMobileListener } from "../listener";
+import { Button } from "./cards/styled";
 import { ConfirmedDataState } from "./confirmation";
 import { Modal } from "./modal/modal";
-import { Button, ConfirmacionesContainer, ContainerLogged, Flex, IconWrapper, InputApp, SelectWrapper, StyledOption, StyledSelect } from "./styled";
+import { ConfirmacionesContainer, ContainerLogged, Flex, IconWrapper, InputApp, SelectWrapper, StyledOption, StyledSelect } from "./styled";
 
 export const Dashboard = () => {
     const [confirmaciones, setConfirmaciones] = useState<ConfirmedDataState[]>([]);

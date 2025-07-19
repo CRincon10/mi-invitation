@@ -1,4 +1,5 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
+import texture from "../../assets/images/fondoMatrimonio.jpg";
 
 export const ModalOverlay = styled.div`
     position: fixed;
@@ -14,7 +15,11 @@ export const ModalOverlay = styled.div`
 `;
 
 export const ModalContent = styled.div`
-    background: white;
+    background-image: url(${texture});
+    background-size: 400px 400px;
+    background-repeat: repeat;
+    background-position: center;
+    background-color: #fffefdff;
     width: 100vw;
     height: 100vh;
     padding: 20px 20px 40px;

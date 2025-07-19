@@ -1,5 +1,3 @@
-import ceremonia from "../assets/images/ceremonia.png";
-import ching from "../assets/images/ching.png";
 import family from "../assets/images/family.jpg";
 import { useIsMobileListener } from "../listener";
 import { EventCard } from "./cards/eventCard";
@@ -18,6 +16,9 @@ import {
     TitleContent
 } from "./styled";
 import { WeddingCountdown } from "./WeddingCountdown";
+
+import cups from "../assets/animations/FiestaCopas.json";
+import weddingRings from "../assets/animations/Wedding.json";
 
 export default function Invitacion() {
     const isMobile = useIsMobileListener();
@@ -44,7 +45,7 @@ export default function Invitacion() {
             <SaveTheDate />
             <Flex column gap={40}>
                 <EventCard
-                    icon={ceremonia}
+                    icon={weddingRings}
                     title="Ceremonia"
                     time="4:00 pm"
                     place="Parroquia Santa Maria de los Angeles - Poblado"
@@ -52,7 +53,7 @@ export default function Invitacion() {
                     onButtonClick={() => window.open("https://www.google.com/maps/place/Parroquia+Santa+Mar%C3%ADa+de+Los+%C3%81ngeles/@6.1909884,-75.58416,17z/data=!3m1!4b1!4m6!3m5!1s0x8e468360f9758e77:0x6f0e4b95b313d3c1!8m2!3d6.1909831!4d-75.5792891!16s%2Fg%2F1tc_547g?entry=ttu", "_blank")}
                 />
                 <EventCard
-                    icon={ching}
+                    icon={cups}
                     title="Recepción"
                     time="7:00 pm"
                     place="Centro de eventos envigado"
@@ -71,7 +72,7 @@ export default function Invitacion() {
                 </span>
             </Flex>
             <Footer>
-                <Flex column alignCenter justifyCenter gap={10}>
+                <Flex borderRadius={10} column alignCenter justifyCenter gap={10}>
                     <img
                         src={family}
                         alt="Nuestra familia"
@@ -79,7 +80,8 @@ export default function Invitacion() {
                             maxWidth: "100%",
                             width: "400px",
                             boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
-                            objectFit: "cover"
+                            objectFit: "cover",
+                            borderRadius: "10px"
                         }}
                     />
                 </Flex>

@@ -1,24 +1,15 @@
 import styled from "styled-components";
 
 export const Card = styled.div`
-    width: 90%;
+    width: 95%;
     max-width: 400px;
-    background-color: #1f2c4d; /* azul metalizado oscuro */
-    border-radius: 20px;
-    padding: 24px 20px;
+    padding: 0px 20px;
     text-align: center;
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
     margin: 0 auto;
-`;
-
-export const IconWrapper = styled.div`
-    margin-bottom: 20px;
 `;
 
 export const Divider = styled.hr`
     border: none;
-    border-top: 1px solid #b99d79;
-    margin: 20px 0;
 `;
 
 export const Title = styled.h2`
@@ -29,9 +20,27 @@ export const Title = styled.h2`
     margin: 0;
 `;
 
+export const Ribbon = styled.div`
+  display: inline-block;
+  position: relative;
+  background-color: #7a8b7f;
+  color: white;
+  font-family: 'Pacifico', cursive;
+  font-size: 24px;
+  padding: 12px 40px;
+  text-align: center;
+  clip-path: polygon(
+    15px 0%, 
+    calc(100% - 15px) 0%, 
+    100% 50%, 
+    calc(100% - 15px) 100%, 
+    15px 100%, 
+    0% 50%
+  );
+`;
+
 export const SubTitle = styled.h2`
     font-size: 25px;
-    color: #f0eae3; /* marfil */
     font-weight: 600;
     letter-spacing: 1px;
     margin: 0;
@@ -40,13 +49,12 @@ export const SubTitle = styled.h2`
 export const Info = styled.div`
     font-size: 18px;
     margin: 12px 0;
-    color: #f0eae3;
 `;
 
 export const Label = styled.span`
     display: block;
     font-weight: bold;
-    color: #d6c6b8; /* perlado claro */
+    /* color: #d6c6b8; perlado claro */
 `;
 
 export const Button = styled.button`
