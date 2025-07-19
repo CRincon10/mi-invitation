@@ -1,7 +1,7 @@
 import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from 'react';
 import { db } from "../firebaseConfig";
-import { Button } from './cards/styled';
+import { Button, Label } from './cards/styled';
 import HeartLineComponent from './heartLine';
 import { Modal } from './modal/modal';
 import { Circle, Flex, InputApp, Wrapper } from './styled';
@@ -159,7 +159,7 @@ export const Confirmation = () => {
 
             <HeartLineComponent />
             <span className="color-gold" style={{fontFamily: "Satisfy", fontSize: "35px", fontWeight: 'bold', marginBottom: "10px" }}>Confirmación</span>
-            <span  style={{ fontSize: "18px", fontWeight: 'bold' }}>Nos acompañas en este dia tan especial?</span>
+            <Label  style={{ fontWeight: 'bold' }}>Nos acompañas en este dia tan especial?</Label>
             <Flex alignCenter justifyCenter marginTop={30} marginBottom={30}>
                 <span className='fas fa-list' style={{ fontSize: "40px" }} />
             </Flex>

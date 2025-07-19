@@ -19,7 +19,7 @@ const GlobalStyle = createGlobalStyle`
         margin: 0;
         padding: 0;
         font-family: 'Lora', serif;
-        font-size: 24px;
+        font-size: 20px;
         color: #747567;
     }
 
@@ -35,7 +35,7 @@ const GlobalStyle = createGlobalStyle`
         color: white;
         border: none;
         padding: 14px 26px;
-        font-size: 17px;
+        font-size: 24px;
         border-radius: 8px;
         cursor: pointer;
         font-family: "Lora";

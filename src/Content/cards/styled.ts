@@ -21,22 +21,22 @@ export const Title = styled.h2`
 `;
 
 export const Ribbon = styled.div`
-  display: inline-block;
-  position: relative;
-  background-color: #7a8b7f;
-  color: white;
-  font-family: 'Pacifico', cursive;
-  font-size: 24px;
-  padding: 12px 40px;
-  text-align: center;
-  clip-path: polygon(
-    15px 0%, 
-    calc(100% - 15px) 0%, 
-    100% 50%, 
-    calc(100% - 15px) 100%, 
-    15px 100%, 
-    0% 50%
-  );
+    display: inline-block;
+    position: relative;
+    background-color: #7a8b7f;
+    color: white;
+    font-size: 28px;
+    font-family: "Satisfy";
+    padding: 12px 40px;
+    text-align: center;
+    clip-path: polygon(
+        15px 0%, 
+        calc(100% - 15px) 0%, 
+        100% 50%, 
+        calc(100% - 15px) 100%, 
+        15px 100%, 
+        0% 50%
+    );
 `;
 
 export const SubTitle = styled.h2`
@@ -47,14 +47,12 @@ export const SubTitle = styled.h2`
 `;
 
 export const Info = styled.div`
-    font-size: 18px;
     margin: 12px 0;
 `;
 
 export const Label = styled.span`
     display: block;
     font-weight: bold;
-    /* color: #d6c6b8; perlado claro */
 `;
 
 export const Button = styled.button`
@@ -67,6 +65,7 @@ export const Button = styled.button`
     cursor: pointer;
     transition: background-color 0.3s;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    font-size: 20px !important;
 
     &:hover {
         background-color: #a78564;
