@@ -18,7 +18,7 @@ const HeaderImg = styled.img`
     opacity: 0.9;
     pointer-events: none;   /* evita interacción directa */
     user-select: none;      /* no se puede seleccionar */
-    -webkit-user-drag: none;/* no se puede arrastrar */
+    /* -webkit-user-drag: none;no se puede arrastrar */
 `;
 
 export default function HeaderImage() {

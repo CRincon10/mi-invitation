@@ -28,7 +28,7 @@ export const VideoAndPhotosCard = () => {
                         Ir a la galería
                     </Button> */}
                     <span style={{ 
-                        fontSize: "16px", 
+                        fontSize: "25px", 
                         marginTop: "10px", 
                         textAlign: "center", 
                     }}>
