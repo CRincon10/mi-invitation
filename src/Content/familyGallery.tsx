@@ -6,7 +6,6 @@ import { Flex } from "./styled";
 export const FamilyGallery = () => {
     return (
         <Flex column alignCenter justifyCenter gap={20} padding={20}>
-            {/* Dos imágenes verticales en la parte superior */}
             <Flex gap={20} alignCenter justifyCenter style={{ flexWrap: "wrap" }}>
                 <img
                     src={family}

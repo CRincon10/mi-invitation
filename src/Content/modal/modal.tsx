@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Flex } from '../styled';
 import { ModalOverlay, ModalContent, CloseButton } from './styled';
 

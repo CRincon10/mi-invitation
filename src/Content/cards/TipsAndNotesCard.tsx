@@ -67,7 +67,7 @@ export const TipsAndNotesCard = () => {
                                 <span className='fa fa-heart' />
                             </HeartIcon>
                             <ChecklistText>
-                                <strong>Restricciones:</strong> No se pueden arrojar pétalos, ni arroz, ni confeti.
+                                <strong>Restricciones:</strong> A la salida de la iglesia no está permitido arrojar pétalos, arroz ni confeti.
                             </ChecklistText>
                         </ChecklistItem>
                         <ChecklistItem>

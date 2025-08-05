@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Dashboard } from "./Content/dashboard";
 import Invitacion from "./Content/invitation";
 import Login from "./Content/login";
+import { PhotoPage } from "./Content/PhotoPage";
 import GlobalStyle from "./globalStyles";
 import ProtectedRoute from "./Routes/protectedRoutes";
 import { useEffect } from "react";
@@ -19,6 +20,7 @@ const App: React.FC = () => {
                 <Routes>
                     <Route path="/" element={<Invitacion />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/fotos" element={<PhotoPage />} />
                     <Route
                         path="/dashboard"
                         element={

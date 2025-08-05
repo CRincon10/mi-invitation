@@ -1,6 +1,7 @@
 import Lottie from 'lottie-react';
 import styled from 'styled-components';
 import heartAnimation from '../assets/animations/WeddingRings.json';
+import { useIsMobileListener } from '../listener';
 import HeartLineComponent from './heartLine';
 import { Flex, TitleWrapper, Wrapper } from './styled';
 import { Button } from './cards/styled';
@@ -28,6 +29,8 @@ const DayCell = styled.span<{ active?: boolean }>`
 `;
 
 export default function SaveTheDateCalendar() {
+    const isMobile = useIsMobileListener();
+    
     const openGoogleCalendar = () => {
         const title = encodeURIComponent('Boda Mariana & Cristian');
         const location = encodeURIComponent('Medellín, Colombia');
@@ -36,7 +39,12 @@ export default function SaveTheDateCalendar() {
         const endDate = '20251101T170000Z';   // 5:00 p.m. UTC
 
         const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${description}&location=${location}&dates=${startDate}/${endDate}`;
-        window.open(url, '_blank');
+        
+        if (isMobile) {
+            window.location.href = url;
+        } else {
+            window.open(url, '_blank');
+        }
     };
 
     return (

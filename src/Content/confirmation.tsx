@@ -34,7 +34,7 @@ export const Confirmation = () => {
     const [companion, setCompanion] = useState("");
     const [confirmCompanion, setConfirmCompanion] = useState(false);
     const [loading, setLoading] = useState(false);
-    const isButtonDisabled = !name || confirm === undefined;
+    const isButtonDisabled = !name || !name.trim() || (confirmCompanion && (!companion || !companion.trim()));
 
     useEffect(() => {
         // Verifica si ya hay una confirmación guardada en localStorage

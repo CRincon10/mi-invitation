@@ -6,6 +6,7 @@ const GlobalStyle = createGlobalStyle`
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        touch-action: pan-y;
     }
   
     body {
@@ -18,6 +19,7 @@ const GlobalStyle = createGlobalStyle`
         min-height: 100vh;
         margin: 0;
         padding: 0;
+        touch-action: pan-y;
         font-family: 'Lora', serif;
         font-size: 20px;
         color: #747567;

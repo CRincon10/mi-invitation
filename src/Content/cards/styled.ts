@@ -76,6 +76,11 @@ export const Button = styled.button<ButtonProps>`
     &:hover {
         background-color: #a78564;
     }
+
+    &:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
 `;
 
 export const ChecklistContainer = styled.div`

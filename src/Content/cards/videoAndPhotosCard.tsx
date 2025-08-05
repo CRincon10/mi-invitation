@@ -1,41 +1,67 @@
-import { QRCodeSVG } from 'qrcode.react';
 import { useState } from 'react';
-import { Modal } from '../modal/modal';
+import { useNavigate } from 'react-router-dom';
 import { Flex } from '../styled';
-import { Button, Card, Info, Label, Ribbon, SubTitle } from './styled';
+import { Button, Card, Info, Label, Ribbon } from './styled';
 import Lottie from 'lottie-react';
 import clientList from '../../assets/animations/photo.json';
 
 export const VideoAndPhotosCard = () => {
+    const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
+    const currentDate = new Date();
+    const availableDate = new Date('2024-10-20');
+    const isAvailable = currentDate >= availableDate;
 
-    const uploadLink = 'https://tulinkpara-subir-fotos.com'; // <-- Reemplaza con tu link real
+    const handleOpenPhotos = () => {
+        if (isAvailable) {
+            navigate('/fotos');
+        } else {
+            setShowModal(true);
+        }
+    };
 
     return (
         <>
-            <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
-                <Flex column padding={20} gap={20} alignCenter justifyCenter>
-                    {/* <SubTitle>Escanea este código QR</SubTitle>
-                    <QRCodeSVG
-                        value={uploadLink}
-                        size={200}
-                        fgColor="#1a1641"
-                        bgColor="#fef9f6"
-                        level="H"
-                    />
-                    <Label>O toca el botón para abrir directamente</Label>
-                    <Button onClick={() => window.open(uploadLink, '_blank')}>
-                        Ir a la galería
-                    </Button> */}
-                    <span style={{ 
-                        fontSize: "25px", 
-                        marginTop: "10px", 
-                        textAlign: "center", 
+            {showModal && !isAvailable && (
+                <div style={{
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    width: '100vw',
+                    height: '100vh',
+                    backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                    zIndex: 10000,
+                    overflow: 'hidden'
+                }}>
+                    <div style={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        background: 'white',
+                        padding: '40px',
+                        borderRadius: '15px',
+                        maxWidth: '90vw',
+                        textAlign: 'center'
                     }}>
-                        A partir del 20 de octubre estará disponible la aplicación para que todos subamos las fotos de los momentos importantes y entre todos podamos compartirlas sin perdernos nada.
-                    </span>
-                </Flex>
-            </Modal>
+                        <button 
+                            onClick={() => setShowModal(false)}
+                            style={{
+                                position: 'absolute',
+                                top: '10px',
+                                right: '15px',
+                                background: 'none',
+                                border: 'none',
+                                fontSize: '24px',
+                                cursor: 'pointer'
+                            }}
+                        >
+                            ✕
+                        </button>
+                        
+                    </div>
+                </div>
+            )}
             <Flex marginTop={20}></Flex>
             <Card>
                 <Ribbon>Fotos y videos</Ribbon>
@@ -48,9 +74,10 @@ export const VideoAndPhotosCard = () => {
                 />
                 <Info>
                     <Label>No queremos perdernos ningún momento de este hermoso día</Label>
-                    
                 </Info>
-                <Button onClick={() => setShowModal(true)}>Subir fotos</Button>
+                <Button onClick={handleOpenPhotos}>
+                    {isAvailable ? "Abrir Galería" : "Ver Información"}
+                </Button>
             </Card>
         </>
     );

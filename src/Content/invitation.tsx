@@ -55,7 +55,14 @@ export default function Invitacion() {
                     time="4:00 pm"
                     place="Parroquia Santa Maria de los Angeles - Poblado"
                     buttonText="¿Cómo llegar?"
-                    onButtonClick={() => window.open("https://www.google.com/maps/place/Parroquia+Santa+Mar%C3%ADa+de+Los+%C3%81ngeles/@6.1909884,-75.58416,17z/data=!3m1!4b1!4m6!3m5!1s0x8e468360f9758e77:0x6f0e4b95b313d3c1!8m2!3d6.1909831!4d-75.5792891!16s%2Fg%2F1tc_547g?entry=ttu")}
+                    onButtonClick={() => {
+                        const mapUrl = "https://www.google.com/maps/place/Parroquia+Santa+Mar%C3%ADa+de+Los+%C3%81ngeles/@6.1909884,-75.58416,17z/data=!3m1!4b1!4m6!3m5!1s0x8e468360f9758e77:0x6f0e4b95b313d3c1!8m2!3d6.1909831!4d-75.5792891!16s%2Fg%2F1tc_547g?entry=ttu";
+                        if (isMobile) {
+                            window.location.href = mapUrl;
+                        } else {
+                            window.open(mapUrl, '_blank');
+                        }
+                    }}
                 />
                 <EventCard
                     icon={cups}
@@ -63,7 +70,14 @@ export default function Invitacion() {
                     time="6:00 pm"
                     place="Salon de eventos Trinidad envigado"
                     buttonText="¿Cómo llegar?"
-                    onButtonClick={() => window.open("https://www.google.com/maps/dir//Cra+24C+%2341+Sur-275,+Zona+6,+Envigado,+Antioquia/@6.1508508,-75.6667592,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x8e4683a72329444b:0x6f82f44032507970!2m2!1d-75.584494!2d6.1509036?entry=ttu&g_ep=EgoyMDI1MDcxNi4wIKXMDSoASAFQAw%3D%3D")}
+                    onButtonClick={() => {
+                        const mapUrl = "https://www.google.com/maps/dir//Cra+24C+%2341+Sur-275,+Zona+6,+Envigado,+Antioquia/@6.1508508,-75.6667592,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x8e4683a72329444b:0x6f82f44032507970!2m2!1d-75.584494!2d6.1509036?entry=ttu&g_ep=EgoyMDI1MDcxNi4wIKXMDSoASAFQAw%3D%3D";
+                        if (isMobile) {
+                            window.location.href = mapUrl;
+                        } else {
+                            window.open(mapUrl, '_blank');
+                        }
+                    }}
                 />
             </Flex>
             <ImageCarousel />

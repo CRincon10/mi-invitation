@@ -8,7 +8,7 @@ const HeaderContainer = styled.div<{ hidden: boolean }>`
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    touch-action: none; /* Evita zoom y scroll táctil */
+    /* touch-action: none; //Evita zoom y scroll táctil */
 `;
 
 const HeaderImg = styled.img`
@@ -16,8 +16,8 @@ const HeaderImg = styled.img`
     height: 100%;
     object-fit: cover;
     opacity: 0.9;
-    pointer-events: none;   /* evita interacción directa */
-    user-select: none;      /* no se puede seleccionar */
+    /* pointer-events: none;   evita interacción directa */
+    /* user-select: none;      no se puede seleccionar */
     /* -webkit-user-drag: none;no se puede arrastrar */
 `;
 

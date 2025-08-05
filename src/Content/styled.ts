@@ -350,7 +350,6 @@ export const Card = styled.div`
 
 export const Footer = styled.div`
     display: flex;
-    padding:10px;
 `;
 
 export const OptionsContainer = styled.div`
