@@ -15,7 +15,7 @@ export const VideoAndPhotosCard = () => {
         <>
             <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
                 <Flex column padding={20} gap={20} alignCenter justifyCenter>
-                    <SubTitle>Escanea este código QR</SubTitle>
+                    {/* <SubTitle>Escanea este código QR</SubTitle>
                     <QRCodeSVG
                         value={uploadLink}
                         size={200}
@@ -26,7 +26,14 @@ export const VideoAndPhotosCard = () => {
                     <Label>O toca el botón para abrir directamente</Label>
                     <Button onClick={() => window.open(uploadLink, '_blank')}>
                         Ir a la galería
-                    </Button>
+                    </Button> */}
+                    <span style={{ 
+                        fontSize: "16px", 
+                        marginTop: "10px", 
+                        textAlign: "center", 
+                    }}>
+                        A partir del 20 de octubre estará disponible la aplicación para que todos subamos las fotos de los momentos importantes y entre todos podamos compartirlas sin perdernos nada.
+                    </span>
                 </Flex>
             </Modal>
             <Flex marginTop={20}></Flex>
@@ -41,6 +48,7 @@ export const VideoAndPhotosCard = () => {
                 />
                 <Info>
                     <Label>No queremos perdernos ningún momento de este hermoso día</Label>
+                    
                 </Info>
                 <Button onClick={() => setShowModal(true)}>Subir fotos</Button>
             </Card>

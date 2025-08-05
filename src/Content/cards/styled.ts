@@ -55,13 +55,18 @@ export const Label = styled.span`
     font-weight: bold;
 `;
 
-export const Button = styled.button`
+interface ButtonProps {
+    w100?: boolean;
+}
+
+export const Button = styled.button<ButtonProps>`
     margin-top: 24px;
     background-color: #b99d79;
     color: white;
     border: none;
     padding: 12px 24px;
     border-radius: 8px;
+    width: ${(props) => (props.w100 ? "100%" : "auto")};
     cursor: pointer;
     transition: background-color 0.3s;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -71,4 +76,38 @@ export const Button = styled.button`
     &:hover {
         background-color: #a78564;
     }
+`;
+
+export const ChecklistContainer = styled.div`
+    text-align: left;
+    margin: 20px 0;
+`;
+
+export const ChecklistItem = styled.div`
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    padding: 12px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.15);
+    }
+`;
+
+export const HeartIcon = styled.span`
+    font-size: 18px;
+    margin-right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #b99d79;
+    margin-top: 8px;
+`;
+
+export const ChecklistText = styled.span`
+    line-height: 1.5;
+    font-weight: 400;
 `;

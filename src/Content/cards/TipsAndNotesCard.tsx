@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Modal } from '../modal/modal';
 import { Flex } from '../styled';
-import { Button, Card, Info, Label, Ribbon } from './styled';
+import { Button, Card, ChecklistContainer, ChecklistItem, ChecklistText, HeartIcon, Info, Label, Ribbon } from './styled';
 import Lottie from 'lottie-react';
 import note from '../../assets/animations/note.json';
 
@@ -20,8 +20,65 @@ export const TipsAndNotesCard = () => {
     return (
         <>
             <Modal isOpen={showModal} onClose={() => setShowModal(false)} >
-                <Flex column padding={20} gap={20}>
-
+                <Flex column gap={20}>
+                    <ChecklistContainer>
+                        <ChecklistItem>
+                            <HeartIcon>
+                                <span className='fa fa-heart' />
+                            </HeartIcon>
+                            <ChecklistText>
+                                <strong>Código de vestimenta:</strong> Vístete como te sientas cómodo. Lo importante es que nos acompañes en este momento tan especial.
+                            </ChecklistText>
+                        </ChecklistItem>
+                        <ChecklistItem>
+                            <HeartIcon>
+                                <span className='fa fa-heart' />
+                            </HeartIcon>
+                            <ChecklistText>
+                                <strong>Confirmación:</strong> La opción de confirmación estará disponible hasta el 15 de septiembre. Después de este día entendemos que no podrás acompañarnos en este día tan especial.
+                            </ChecklistText>
+                        </ChecklistItem>
+                        <ChecklistItem>
+                            <HeartIcon>
+                                <span className='fa fa-heart' />
+                            </HeartIcon>
+                            <ChecklistText>
+                                <strong>Acompañante:</strong> En el panel de confirmaciones puedes confirmar por ti y una persona más (tu acompañante) en caso de que así se haya informado.
+                            </ChecklistText>
+                        </ChecklistItem>
+                        <ChecklistItem>
+                            <HeartIcon>
+                                <span className='fa fa-heart' />
+                            </HeartIcon>
+                            <ChecklistText>
+                                <strong>Fotos:</strong> La opción de subir fotos estará disponible a partir del 20 de octubre. Agradecemos que suban todas las fotos según la metodología para capturar todos los momentos especiales.
+                            </ChecklistText>
+                        </ChecklistItem>
+                        <ChecklistItem>
+                            <HeartIcon>
+                                <span className='fa fa-heart' />
+                            </HeartIcon>
+                            <ChecklistText>
+                                <strong>Puntualidad:</strong> Llegar puntual a la iglesia. La misa inicia a las 4 en punto.
+                            </ChecklistText>
+                        </ChecklistItem>
+                        <ChecklistItem>
+                            <HeartIcon>
+                                <span className='fa fa-heart' />
+                            </HeartIcon>
+                            <ChecklistText>
+                                <strong>Restricciones:</strong> No se pueden arrojar pétalos, ni arroz, ni confeti.
+                            </ChecklistText>
+                        </ChecklistItem>
+                        <ChecklistItem>
+                            <HeartIcon>
+                                <span className='fa fa-heart' />
+                            </HeartIcon>
+                            <ChecklistText>
+                                <strong>Mascotas:</strong> por normas externas a nosotros no está permitido el ingreso de mascotas.
+                            </ChecklistText>
+                        </ChecklistItem>
+                    </ChecklistContainer>
                 </Flex>
             </Modal>
             <Card>
@@ -36,7 +93,7 @@ export const TipsAndNotesCard = () => {
                 <Info>
                     <Label>Información adicional para tener en cuenta</Label> 
                 </Info>
-                <Button onClick={() => setShowModal(true)}>+ Info</Button>
+                <Button onClick={() => setShowModal(true)}>Ver Tips</Button>
             </Card>
         </>
     )

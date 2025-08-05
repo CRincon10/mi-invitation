@@ -1,10 +1,10 @@
-import family from "../assets/images/family.jpg";
 import { useIsMobileListener } from "../listener";
 import { EventCard } from "./cards/eventCard";
 import { TipsAndNotesCard } from "./cards/TipsAndNotesCard";
 import { VideoAndPhotosCard } from "./cards/videoAndPhotosCard";
 import { ImageCarousel } from "./carouselImage";
 import { Confirmation } from "./confirmation";
+import { FamilyGallery } from "./familyGallery";
 import HeaderImage from "./headerImage";
 import MusicPlayer from "./musicPlayer";
 import SaveTheDate from "./saveTheDate";
@@ -39,10 +39,15 @@ export default function Invitacion() {
                 </Flex>
             </TitleContent>
             <Flex column gap10 alignCenter justifyCenter maxWidth={340} style={{ textAlign: "center", margin: "20px auto" }}>
-                <span>¡Nos casamos! </span>
-                <span> Estamos felices de comenzar esta nueva etapa juntos y queremos celebrarlo contigo. </span>
+                <span className="bold">¡Nos casamos!</span>
+                <span> Queremos compartir este momento tan especial contigo, que eres parte importante de nuestra historia. </span>
             </Flex>
             <SaveTheDate />
+            <Flex alignCenter justifyCenter maxWidth={500} padding={20}>
+                <span style={{ fontSize: "20px", textAlign: "center" }}>
+                    “El amor es una parte del alma misma, es de la misma naturaleza que ella, es una chispa divina; como ella, es incorruptible, indivisible, imperecedero. Es una partícula de fuego que está en nosotros, que es inmortal e infinita, a la cual nada puede limitar, ni amortiguar”.
+                </span>
+            </Flex>
             <Flex column gap={40}>
                 <EventCard
                     icon={weddingRings}
@@ -55,7 +60,7 @@ export default function Invitacion() {
                 <EventCard
                     icon={cups}
                     title="Recepción"
-                    time="7:00 pm"
+                    time="6:00 pm"
                     place="Salon de eventos Trinidad envigado"
                     buttonText="¿Cómo llegar?"
                     onButtonClick={() => window.open("https://www.google.com/maps/dir//Cra+24C+%2341+Sur-275,+Zona+6,+Envigado,+Antioquia/@6.1508508,-75.6667592,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x8e4683a72329444b:0x6f82f44032507970!2m2!1d-75.584494!2d6.1509036?entry=ttu&g_ep=EgoyMDI1MDcxNi4wIKXMDSoASAFQAw%3D%3D")}
@@ -68,23 +73,11 @@ export default function Invitacion() {
 
             <Flex alignCenter justifyCenter maxWidth={500} padding={20}>
                 <span style={{ fontSize: "20px", textAlign: "center" }}>
-                    “El amor es una parte del alma misma, es de la misma naturaleza que ella, es una chispa divina; como ella, es incorruptible, indivisible, imperecedero. Es una partícula de fuego que está en nosotros, que es inmortal e infinita, a la cual nada puede limitar, ni amortiguar”.
+                    “Dios ha sido el centro de nuestro amor, y en su perfecta voluntad, hoy unimos nuestras vidas. Con su bendición y por amor a nuestros hijos, damos este paso sagrado.”.
                 </span>
             </Flex>
             <Footer>
-                <Flex borderRadius={10} column alignCenter justifyCenter gap={10}>
-                    <img
-                        src={family}
-                        alt="Nuestra familia"
-                        style={{
-                            maxWidth: "100%",
-                            width: "400px",
-                            boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
-                            objectFit: "cover",
-                            borderRadius: "10px"
-                        }}
-                    />
-                </Flex>
+                <FamilyGallery />
             </Footer>
             <WeddingCountdown />
             <MusicPlayer />

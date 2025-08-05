@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { logoutUser } from "../firebase/functions";
 import { db } from "../firebaseConfig";
 import FilterToggle from "../inputs/toggle";
-import { useIsMobileListener } from "../listener";
 import { Button } from "./cards/styled";
 import { ConfirmedDataState } from "./confirmation";
 import { Modal } from "./modal/modal";
@@ -18,7 +17,6 @@ export const Dashboard = () => {
     const [manualName, setManualName] = useState("");
     const [manualConfirm, setManualConfirm] = useState<boolean | undefined>(undefined);
     const [manualCompanion, setManualCompanion] = useState("");
-    const isMobile = useIsMobileListener();
 
     useEffect(() => {
         const fetchConfirmaciones = async () => {
@@ -45,8 +43,8 @@ export const Dashboard = () => {
             const coincideAcompanante = c.nombreAcompanante?.toLowerCase().includes(filtroTexto) || false;
             const coincideAsistencia =
                 filtro === "todos" ||
-                (filtro === "asistentes" && c.asiste) ||
-                (filtro === "no-asistentes" && !c.asiste);
+                (filtro === "asistentes" && c.asisteCeremonia) ||
+                (filtro === "no-asistentes" && !c.asisteCeremonia);
 
             return (coincideNombre || coincideAcompanante) && coincideAsistencia;
         })
@@ -63,8 +61,9 @@ export const Dashboard = () => {
 
         const confirmationData = {
             nombre: manualName,
-            asiste: manualConfirm,
-            fechaConfirmacion: serverTimestamp(), // Se usa el timestamp de Firestore
+            asisteCeremonia: manualConfirm,
+            asisteRecepcion: manualConfirm, // Asumiendo que la respuesta es la misma para ambos
+            fechaConfirmacion: serverTimestamp(),
             acompanante: !!manualCompanion,
             nombreAcompanante: manualCompanion || null,
         };
@@ -73,8 +72,15 @@ export const Dashboard = () => {
             const docRef = await addDoc(collection(db, "confirmaciones"), confirmationData);
             const newId = docRef.id;
 
+            const newConfirmation: ConfirmedDataState = {
+                ...confirmationData,
+                id: newId,
+                fechaConfirmacion: { seconds: new Date().getTime() / 1000 }
+            };
+
             // Agregarlo a la lista de confirmaciones en pantalla (simulación, ya que serverTimestamp() se resuelve en el backend)
-            setConfirmaciones([...confirmaciones, { ...confirmationData, id: newId, fechaConfirmacion: new Date() }]);
+            setConfirmaciones([...confirmaciones, newConfirmation]);
+            setManualName("");
 
             alert("Invitado agregado con éxito");
             setShowManualForm(false);
@@ -145,8 +151,8 @@ export const Dashboard = () => {
                     selected={filtro}
                     setSelected={setFiltro}
                     all={confirmaciones.reduce((total, c) => total + (c.nombreAcompanante ? 2 : 1), 0)}
-                    attends={confirmaciones.reduce((total, c) => total + (c.asiste ? (c.nombreAcompanante ? 2 : 1) : 0), 0)}
-                    noAttends={confirmaciones.reduce((total, c) => total + (!c.asiste ? (c.nombreAcompanante ? 2 : 1) : 0), 0)}
+                    attends={confirmaciones.reduce((total, c) => total + (c.asisteCeremonia ? (c.nombreAcompanante ? 2 : 1) : 0), 0)}
+                    noAttends={confirmaciones.reduce((total, c) => total + (!c.asisteCeremonia ? (c.nombreAcompanante ? 2 : 1) : 0), 0)}
                 />
             </Flex>
             <Flex w100 style={{ maxWidth: "500px", margin: "0 auto" }}>
@@ -154,11 +160,6 @@ export const Dashboard = () => {
                     <ol>
                         {confirmacionesFiltradas.length > 0 ? (
                             confirmacionesFiltradas.map((confirm, index) => {
-
-                                const fecha = confirm.fechaConfirmacion instanceof Date
-                                    ? confirm.fechaConfirmacion
-                                    : new Date(confirm.fechaConfirmacion.seconds * 1000);
-
                                 return (
                                     <Flex alignCenter gap10>
                                         <li key={index}>
@@ -167,8 +168,8 @@ export const Dashboard = () => {
                                                     {confirm.nombreAcompanante && ` y ${confirm.nombreAcompanante}`}
                                                 </span>
 
-                                                <span className={confirm.asiste ? "asiste" : "no-asiste"}>
-                                                    {confirm.asiste ? (confirm.nombreAcompanante ? "Asisten ✅" : "Asiste ✅") : (confirm.nombreAcompanante ? "No asisten ❌" : "No asiste ❌")}
+                                                <span className={confirm.asisteCeremonia ? "asiste" : "no-asiste"}>
+                                                    {confirm.asisteCeremonia ? (confirm.nombreAcompanante ? "Asisten ✅" : "Asiste ✅") : (confirm.nombreAcompanante ? "No asisten ❌" : "No asiste ❌")}
                                                 </span>
                                                 <span>
                                                     Fecha de confirmación: {moment.unix(confirm.fechaConfirmacion.seconds).format("DD/MM/YYYY")}

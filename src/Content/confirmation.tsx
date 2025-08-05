@@ -10,24 +10,31 @@ import { Circle, Flex, InputApp, Wrapper } from './styled';
 export interface ConfirmedDataState {
     id: string;
     nombre: string;
-    asiste: boolean;
     fechaConfirmacion: any;
     acompanante: boolean;
     nombreAcompanante: string | null;
+    asisteCeremonia: boolean;
+    asisteRecepcion: boolean;
+}
+
+interface ConfirmState {
+    asisteCeremonia: boolean;
+    asisteRecepcion: boolean;
 }
 
 export const Confirmation = () => {
     const [openConfirm, setOpenConfirm] = useState(false);
     const [confirmedData, setConfirmedData] = useState<ConfirmedDataState>();
     const [docId, setDocId] = useState<string | null>(null);
-    const [confirm, setConfirm] = useState<boolean>();
+    const [confirm, setConfirm] = useState<ConfirmState>({
+        asisteCeremonia: false,
+        asisteRecepcion: false
+    });
     const [name, setName] = useState("");
     const [companion, setCompanion] = useState("");
     const [confirmCompanion, setConfirmCompanion] = useState(false);
     const [loading, setLoading] = useState(false);
     const isButtonDisabled = !name || confirm === undefined;
-
-
 
     useEffect(() => {
         // Verifica si ya hay una confirmación guardada en localStorage
@@ -37,6 +44,7 @@ export const Confirmation = () => {
             setConfirmedData(data);
             setDocId(data.id || null); // Recupera el ID si existe
         }
+        setConfirmCompanion(false);
     }, []);
 
     const handleConfirm = async () => {
@@ -44,10 +52,11 @@ export const Confirmation = () => {
 
         const confirmationData = {
             nombre: name,
-            asiste: confirm,
             fechaConfirmacion: new Date(),
             acompanante: !!companion,
             nombreAcompanante: companion || null,
+            asisteCeremonia: confirm.asisteCeremonia,
+            asisteRecepcion: confirm.asisteRecepcion,
         };
 
         setLoading(true);
@@ -89,65 +98,117 @@ export const Confirmation = () => {
                                     {confirmedData.nombre}{confirmedData.nombreAcompanante ? ` y ${confirmedData.nombreAcompanante}` : ""}, gracias por confirmar tu asistencia.
                                 </span>
                                 <span style={{ fontSize: "22px", marginTop: "20px" }} className="color-app">
-                                    {confirmedData.asiste
+                                    {confirmedData.asisteCeremonia || confirmedData.asisteRecepcion
                                         ? "Estamos muy felices de poder compartir este día tan especial contigo."
                                         : "Lamentamos que no puedas asistir, pero sabemos que estarás con nosotros en espíritu."}
                                 </span>
                             </Flex>
                             : (
-                                <Flex column paddingRight={20} paddingBottom={50} paddingLeft={20} spaceBetween>
-                                    <Flex column gap20>
-                                        <span className="color-app">Asistes a la ceremonia?</span>
-                                        <Flex spaceBetween>
-                                            <Flex alignCenter gap10>
-                                                <Circle onClick={() => setConfirm(true)} selected={confirm === true}>✔</Circle>
-                                                <span style={{ fontSize: "22px" }} className="color-app">¡Sí! Confirmo</span>
-                                            </Flex>
-                                            <Flex alignCenter gap10>
-                                                <Circle onClick={() => setConfirm(false)} selected={confirm === false}>✖</Circle>
-                                                <span style={{ fontSize: "22px" }} className="color-app">No puedo :(</span>
-                                            </Flex>
-                                        </Flex>
-
-                                        <Flex column gap10>
-                                            <InputApp
-                                                className="input-confirmation"
-                                                type="text"
-                                                placeholder="Nombre completo"
-                                                value={name}
-                                                onChange={(e) => setName(e.target.value)}
-                                            />
-                                            <Flex alignCenter gap10>
+                                <Flex column paddingRight={10} paddingBottom={50} paddingLeft={10} spaceBetween>
+                                    <Flex column gap10>
+                                        <span>Compartenos tus datos personales para la confirmación:</span>
+                                        <InputApp
+                                            className="input-confirmation"
+                                            type="text"
+                                            placeholder="Nombre completo"
+                                            value={name}
+                                            onChange={(e) => setName(e.target.value)}
+                                            autoFocus
+                                            style={{ fontSize: "18px" }}
+                                        />
+                                        <Flex alignCenter gap10>
+                                            <div style={{ position: 'relative', display: 'inline-block', marginTop: '8px' }}>
                                                 <input
                                                     type="checkbox"
                                                     id="acompanante"
                                                     checked={confirmCompanion}
                                                     onChange={(e) => setConfirmCompanion(e.target.checked)}
+                                                    style={{
+                                                        appearance: 'none',
+                                                        width: '20px',
+                                                        height: '20px',
+                                                        border: '2px solid #b99d79',
+                                                        borderRadius: '4px',
+                                                        backgroundColor: confirmCompanion ? '#b99d79' : 'transparent',
+                                                        cursor: 'pointer',
+                                                        position: 'relative',
+                                                        transition: 'all 0.3s ease'
+                                                    }}
                                                 />
-                                                <label htmlFor="acompanante" style={{ fontSize: "18px" }} className="color-app">
-                                                    Confirmar por acompañante
-                                                </label>
-                                            </Flex>
-                                            {confirmCompanion && (
-                                                <InputApp
-                                                    className="input-confirmation"
-                                                    type="text"
-                                                    placeholder="Nombre del acompañante o pareja"
-                                                    value={companion}
-                                                    onChange={(e) => setCompanion(e.target.value)}
-                                                />
-                                            )}
+                                                {confirmCompanion && (
+                                                    <span style={{
+                                                        position: 'absolute',
+                                                        top: '2px',
+                                                        left: '5px',
+                                                        color: 'white',
+                                                        fontSize: '12px',
+                                                        fontWeight: 'bold',
+                                                        pointerEvents: 'none'
+                                                    }}>✓</span>
+                                                )}
+                                            </div>
+                                            <label
+                                                htmlFor="acompanante"
+                                                style={{
+                                                    fontSize: "18px",
+                                                    cursor: "pointer",
+                                                    userSelect: "none",
+                                                    padding: "5px 0"
+                                                }}
+                                                className="color-app"
+                                            >
+                                                Confirmar por mi acompañante
+                                            </label>
                                         </Flex>
-                                        {confirm && <Flex gap10 w100>
+                                        {confirmCompanion && (
+                                            <InputApp
+                                                className="input-confirmation"
+                                                type="text"
+                                                placeholder="Nombre del acompañante o pareja"
+                                                value={companion}
+                                                onChange={(e) => setCompanion(e.target.value)}
+                                            />
+                                        )}
+                                    </Flex>
+                                    <Flex column gap20 marginTop={30} alignStart>
+                                        <span className="color-app" style={{ fontSize: "22px" }}>{`- ${confirmCompanion ? "Asisten" : "Asistes"} a la ceremonia?`}</span>
+                                        <Flex spaceBetween gap20 column>
+                                            <Flex alignCenter gap10 onClick={() => setConfirm({ ...confirm, asisteCeremonia: true })}>
+                                                <Circle selected={confirm?.asisteCeremonia === true}>✔</Circle>
+                                                <span style={{ fontSize: "18px" }} className="color-app">{`${confirmCompanion ? "¡Sí! Confirmamos" : "¡Sí! Confirmo."}`}</span>
+                                            </Flex>
+                                            <Flex alignCenter gap10 onClick={() => setConfirm({ ...confirm, asisteCeremonia: false })}>
+                                                <Circle selected={confirm.asisteCeremonia === false}>✖</Circle>
+                                                <span style={{ fontSize: "18px" }} className="color-app">{`${confirmCompanion ? "¡No! No podemos : (" : "¡No! No puedo : ("}`}</span>
+                                            </Flex>
+                                        </Flex>
+                                    </Flex>
+                                    <Flex column gap20 marginTop={30} alignStart>
+                                        <span className="color-app" style={{ fontSize: "22px" }}>{`- ${confirmCompanion ? "Asisten" : "Asistes"} a la recepción?`}</span>
+                                        <Flex spaceBetween column gap20>
+                                            <Flex alignCenter gap10 onClick={() => setConfirm({ ...confirm, asisteRecepcion: true })}>
+                                                <Circle selected={confirm.asisteRecepcion === true}>✔</Circle>
+                                                <span style={{ fontSize: "18px" }} className="color-app">{`${confirmCompanion ? "¡Sí! Confirmamos" : "¡Sí! Confirmo."}`}</span>
+                                            </Flex>
+                                            <Flex alignCenter gap10 onClick={() => setConfirm({ ...confirm, asisteRecepcion: false })}>
+                                                <Circle selected={confirm.asisteRecepcion === false}>✖</Circle>
+                                                <span style={{ fontSize: "18px" }} className="color-app">{`${confirmCompanion ? "¡No! No podemos : (" : "¡No! No puedo : ("}`}</span>
+                                            </Flex>
+                                        </Flex>
+                                    </Flex>
+                                    {confirm.asisteRecepcion &&
+                                        <Flex gap10 w100 marginTop={50} column>
                                             <i className="fa-regular fa-envelope color-app" style={{ fontSize: "60px" }} />
                                             <Flex flexWrap justifyCenter textAlignCenter>
-                                                <span style={{ fontSize: "18px" }} className="color-app">Más que regalos materiales, queremos iniciar nuestro hogar con mucho amor y bendiciones. Si deseas obsequiarnos algo, una lluvia de sobres será bienvenida con el corazón.</span>
+                                                <span style={{ fontSize: "18px" }} className="color-app">
+                                                    Nuestro mayor deseo es compartir este día tan especial contigo. Tu presencia es el mejor regalo,
+                                                    pero si deseas tener un detalle con nosotros, una lluvia de sobres será recibida con gratitud y cariño.
+                                                </span>
                                             </Flex>
                                         </Flex>
-                                        }
-                                    </Flex>
-                                    <Flex>
-                                        <Button className={isButtonDisabled ? "disabled" : ""} disabled={isButtonDisabled} onClick={() => handleConfirm()} style={{ marginTop: "20px" }}>
+                                    }
+                                    <Flex marginTop={30}>
+                                        <Button w100 className={isButtonDisabled ? "disabled" : ""} disabled={isButtonDisabled} onClick={() => handleConfirm()} style={{ marginTop: "20px" }}>
                                             {loading ? "Enviando..." : "Enviar Respuesta"}
                                         </Button>
                                     </Flex>
@@ -158,8 +219,8 @@ export const Confirmation = () => {
             )}
 
             <HeartLineComponent />
-            <span className="color-gold" style={{fontFamily: "Satisfy", fontSize: "35px", fontWeight: 'bold', marginBottom: "10px" }}>Confirmación</span>
-            <Label  style={{ fontWeight: 'bold' }}>Nos acompañas en este dia tan especial?</Label>
+            <span className="color-gold" style={{ fontFamily: "Satisfy", fontSize: "35px", fontWeight: 'bold', marginBottom: "10px" }}>Confirmación</span>
+            <Label style={{ fontWeight: 'bold' }}>Nos acompañas en este dia tan especial?</Label>
             <Flex alignCenter justifyCenter marginTop={30} marginBottom={30}>
                 <span className='fas fa-list' style={{ fontSize: "40px" }} />
             </Flex>

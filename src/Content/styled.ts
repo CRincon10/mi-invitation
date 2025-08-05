@@ -368,8 +368,8 @@ export const ConfirmationOption = styled.div`
 `;
 
 export const Circle = styled.div<CircleProps>`
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     border: 2px solid #b19776;
     display: flex;
@@ -389,7 +389,22 @@ export const InputApp = styled.input`
     border-radius: 5px;
     font-family: "Leckerli One", cursive;
     background-size: cover;
+    font-size: 18px;
+    color: #747567;
+
+    &::placeholder {
+        color: #b19776;
+        opacity: 0.7;
+    }
+
+    &:focus {
+        outline: none;
+        border-color: #a78564;
+        box-shadow: 0 0 5px rgba(167, 133, 100, 0.5);
+    }
 `;
+
+
 
 interface CircleProps {
     selected: boolean;
