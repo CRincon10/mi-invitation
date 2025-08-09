@@ -87,7 +87,6 @@ export const Button = styled.button<ButtonProps>`
 
 export const ChecklistContainer = styled.div`
     text-align: left;
-    margin: 20px 0;
 `;
 
 export const ChecklistItem = styled.div`

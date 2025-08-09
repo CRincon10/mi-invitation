@@ -1,0 +1,131 @@
+/* Estilos personalizados para SweetAlert2 - Tema Boda */
+
+/* Popup principal */
+.wedding-alert-popup {
+    border-radius: 15px !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15) !important;
+    font-family: 'Lora', serif !important;
+    border: 2px solid rgba(177, 151, 118, 0.2) !important;
+}
+
+/* Título */
+.wedding-alert-title {
+    color: #b19776 !important;
+    font-weight: 600 !important;
+    font-size: 24px !important;
+    margin-bottom: 10px !important;
+}
+
+/* Contenido */
+.wedding-alert-content {
+    color: #555 !important;
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+}
+
+/* Botón de confirmación */
+.wedding-alert-confirm {
+    background: linear-gradient(135deg, #b19776 0%, #9d8560 100%) !important;
+    border: none !important;
+    border-radius: 25px !important;
+    padding: 12px 30px !important;
+    font-weight: 500 !important;
+    font-size: 16px !important;
+    box-shadow: 0 4px 15px rgba(177, 151, 118, 0.3) !important;
+    transition: all 0.3s ease !important;
+}
+
+.wedding-alert-confirm:hover {
+    background: linear-gradient(135deg, #9d8560 0%, #8a7350 100%) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(177, 151, 118, 0.4) !important;
+}
+
+.wedding-alert-confirm:focus {
+    box-shadow: 0 0 0 3px rgba(177, 151, 118, 0.3) !important;
+}
+
+/* Botón de cancelación */
+.wedding-alert-cancel {
+    background: #f8f9fa !important;
+    color: #6c757d !important;
+    border: 2px solid #dee2e6 !important;
+    border-radius: 25px !important;
+    padding: 12px 30px !important;
+    font-weight: 500 !important;
+    font-size: 16px !important;
+    transition: all 0.3s ease !important;
+}
+
+.wedding-alert-cancel:hover {
+    background: #e9ecef !important;
+    border-color: #adb5bd !important;
+    transform: translateY(-1px) !important;
+}
+
+/* Iconos personalizados */
+.swal2-icon.swal2-success {
+    border-color: #1a3b34 !important;
+    color: #1a3b34 !important;
+}
+
+.swal2-icon.swal2-success .swal2-success-ring {
+    border-color: rgba(26, 59, 52, 0.3) !important;
+}
+
+.swal2-icon.swal2-success .swal2-success-fix {
+    background-color: #1a3b34 !important;
+}
+
+.swal2-icon.swal2-success [class^='swal2-success-line'] {
+    background-color: #1a3b34 !important;
+}
+
+/* Barra de progreso del timer */
+.swal2-timer-progress-bar {
+    background: linear-gradient(90deg, #b19776 0%, #1a3b34 100%) !important;
+}
+
+/* Animaciones suaves */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translate3d(0, -100%, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes fadeOutUp {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        transform: translate3d(0, -100%, 0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .wedding-alert-popup {
+        margin: 20px !important;
+        width: calc(100% - 40px) !important;
+    }
+    
+    .wedding-alert-title {
+        font-size: 20px !important;
+    }
+    
+    .wedding-alert-content {
+        font-size: 14px !important;
+    }
+    
+    .wedding-alert-confirm,
+    .wedding-alert-cancel {
+        padding: 10px 25px !important;
+        font-size: 14px !important;
+    }
+}

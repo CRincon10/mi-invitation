@@ -8,6 +8,7 @@ import { Button, Label } from "./cards/styled";
 import { ConfirmedDataState } from "./confirmation";
 import { Modal } from "./modal/modal";
 import { ConfirmacionesContainer, ContainerLogged, Flex, IconWrapper, InputApp, SelectWrapper, StyledOption, StyledSelect } from "./styled";
+import { showSuccessAlert, showErrorAlert } from '../utils/alerts';
 
 export const Dashboard = () => {
     const [confirmaciones, setConfirmaciones] = useState<ConfirmedDataState[]>([]);
@@ -86,11 +87,11 @@ export const Dashboard = () => {
             setManualConfirmCeremonia(undefined);
             setManualConfirmRecepcion(undefined);
 
-            alert("Invitado agregado con éxito");
+            showSuccessAlert("¡Invitado agregado!", "La confirmación se guardó correctamente.");
             setShowManualForm(false);
         } catch (error) {
             console.error("Error al guardar el invitado:", error);
-            alert("Hubo un error, intenta nuevamente.");
+            showErrorAlert("Error al guardar", "Hubo un problema. Intenta nuevamente.");
         }
     };
 

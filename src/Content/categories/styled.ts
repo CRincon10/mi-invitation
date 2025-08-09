@@ -2,7 +2,18 @@ import styled from "styled-components";
 
 
 export const CategoryContainer = styled.div`
-    background: linear-gradient(135deg, #1a3b34 0%, #0d1b0f 100%) !important;
+    /* Fondo oscuro ultra sutil con gradientes */
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.04) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.02) 0%, transparent 40%),
+        radial-gradient(circle at 50% 10%, rgba(255, 255, 255, 0.06) 0%, transparent 30%),
+        linear-gradient(135deg, #0d2520 0%, #091a16 25%, #0a1e1a 50%, #061611 75%, #041209 100%) !important;
+    background-color: #041209 !important;
+    background-attachment: local !important;
+    background-size: cover !important;
+    background-image: none !important;
+    background-repeat: no-repeat !important;
+    
     min-height: 100vh;
     color: white;
     padding: 20px;
@@ -14,15 +25,13 @@ export const CategoryContainer = styled.div`
     z-index: 1000;
     -webkit-overflow-scrolling: touch;
     overflow-y: auto;
-    
-    background-attachment: local !important;
-    background-size: cover !important;
-    background-image: none !important;
-    background-color: #1a3b34 !important;
-    background-repeat: no-repeat !important;
 
     @media (max-width: 768px) {
         padding-bottom: 120px; /* Espacio extra para los controles de paginación */
+        background: 
+            radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.03) 0%, transparent 40%),
+            radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.02) 0%, transparent 35%),
+            linear-gradient(135deg, #0d2520 0%, #091a16 30%, #061611 70%, #041209 100%) !important;
     }
     
     * {
@@ -35,8 +44,8 @@ export const CategoryContainer = styled.div`
 `;
 
 export const BackButton = styled.button`
-    background: linear-gradient(135deg, #2d4a3a 0%, #1a3b34 100%);
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.03) 100%);
+    border: 2px solid rgba(255, 255, 255, 0.12);
     border-radius: 30px;
     padding: 12px 24px;
     color: white;
@@ -44,7 +53,7 @@ export const BackButton = styled.button`
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(20px);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     display: flex;
     align-items: center;
@@ -52,9 +61,10 @@ export const BackButton = styled.button`
     margin-bottom: 20px;
 
     &:hover {
-        background: linear-gradient(135deg, #1a3b34 0%, #0d2a24 100%);
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.05) 100%);
         transform: translateY(-2px);
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        border-color: rgba(255, 255, 255, 0.20);
     }
 
     &:active {
@@ -77,7 +87,7 @@ export const Header = styled.div`
     
     h1 {
         font-family: 'Great Vibes', cursive;
-        font-size: 40px;
+        font-size: 50px;
         color: #b99d79;
         margin: 0;
         margin-bottom: 8px;
@@ -103,17 +113,23 @@ export const Header = styled.div`
 `;
 
 export const UploadSection = styled.div`
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px dashed rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.04);
+    border: 2px dashed rgba(255, 255, 255, 0.12);
     border-radius: 15px;
     padding: 20px;
     margin-bottom: 30px;
     text-align: center;
     transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
     
     &.drag-over {
-        border-color: #1a3b34;
-        background: rgba(76, 175, 80, 0.1);
+        border-color: #b99d79;
+        background: rgba(185, 157, 121, 0.08);
+    }
+    
+    &:hover {
+        background: rgba(255, 255, 255, 0.06);
+        border-color: rgba(255, 255, 255, 0.18);
     }
     
     input[type="file"] {
@@ -125,7 +141,7 @@ export const UploadSection = styled.div`
         
         i {
             font-size: 2rem;
-            color: #1a3b34;
+            color: #b99d79;
             margin-bottom: 10px;
             display: block;
         }
@@ -156,11 +172,15 @@ export const PhotoCard = styled.div`
     border-radius: 12px;
     overflow: hidden;
     transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
     
     &:hover {
         transform: translateY(-5px);
         box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.15);
     }
     
     img {
@@ -205,21 +225,23 @@ export const PaginationControls = styled.div`
     margin: 30px 0px;
     
     button {
-        background: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
         color: white;
         padding: 10px 15px;
         border-radius: 8px;
         cursor: pointer;
         transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
         
         &:disabled {
-            opacity: 0.5;
+            opacity: 0.3;
             cursor: not-allowed;
         }
         
         &:not(:disabled):hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
         }
     }
     
@@ -253,7 +275,7 @@ export const ModalButtons = styled.div`
     
     button {
         background: rgba(0, 0, 0, 0.7);
-        border: 1px solid rgba(255, 255, 255, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.15);
         color: white;
         padding: 12px;
         border-radius: 50%;
@@ -264,10 +286,12 @@ export const ModalButtons = styled.div`
         align-items: center;
         justify-content: center;
         transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
         
         &:hover {
             background: rgba(0, 0, 0, 0.9);
             transform: scale(1.1);
+            border-color: rgba(255, 255, 255, 0.25);
         }
         
         i {

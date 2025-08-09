@@ -1,7 +1,9 @@
-import React, { useCallback, useEffect, useState, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { listImagesFromImageKitPaginated, photoCategories, uploadImageToImageKit } from '../../config/imagekitConfig';
-import { BackButton, CategoryContainer, Header, LoadingSpinner, Modal, ModalButtons, ModalImage, PhotoCard, PhotoGrid, LoadMoreButton, UploadSection } from './styled';
+import { showErrorAlert } from '../../utils/alerts';
+import { BackButton, CategoryContainer, Header, LoadingSpinner, LoadMoreButton, Modal, ModalButtons, ModalImage, PhotoCard, PhotoGrid, UploadSection } from './styled';
+import { Flex } from '../styled';
 
 interface Photo {
     fileId: string;
@@ -102,15 +104,11 @@ export const CategoryView: React.FC = () => {
                     title: 'Foto de la boda',
                     text: 'Mariana & Cristian'
                 });
-            } else {
-                // Fallback: abrir la imagen para que el usuario pueda guardarla manualmente
-                window.open(selectedPhoto.url, '_blank');
             }
             
         } catch (error) {
             console.error('Error:', error);
-            // Si todo falla, abrir la imagen
-            window.open(selectedPhoto.url, '_blank');
+            showErrorAlert('Error al descargar', 'No se pudo descargar la imagen. Intenta de nuevo.');
         }
     };
 
@@ -137,7 +135,7 @@ export const CategoryView: React.FC = () => {
             
         } catch (error) {
             console.error('Error uploading images:', error);
-            alert('Error al subir las imágenes. Por favor, intenta de nuevo.');
+            showErrorAlert('Error al subir', 'No se pudieron subir las imágenes. Por favor, intenta de nuevo.');
         } finally {
             setUploading(false);
         }
@@ -186,7 +184,6 @@ export const CategoryView: React.FC = () => {
             
             <Header>
                 <h1>{currentCategory.name}</h1>
-                <p>Comparte tus mejores momentos de nuestra boda</p>
             </Header>
 
             <UploadSection 
@@ -205,9 +202,6 @@ export const CategoryView: React.FC = () => {
                 <label htmlFor="file-upload" className="upload-content">
                     <i className="fas fa-cloud-upload-alt"></i>
                     <p>Subir fotos a {currentCategory.name}</p>
-                    <p className="upload-hint">
-                        Haz clic aquí o arrastra las imágenes para subirlas
-                    </p>
                 </label>
             </UploadSection>
 
@@ -258,20 +252,31 @@ export const CategoryView: React.FC = () => {
             )}
 
             {!loading && photos.length === 0 && (
-                <div style={{ textAlign: 'center', padding: '50px 20px' }}>
+                <Flex column style={{ textAlign: 'center', padding: '50px 20px' }}>
                     <i className="fas fa-images" style={{ fontSize: '3rem', opacity: 0.5, marginBottom: '20px' }}></i>
-                    <h3>Aún no hay fotos en esta categoría</h3>
-                    <p style={{ opacity: 0.7 }}>¡Sé el primero en compartir un momento especial!</p>
-                </div>
+                    <span style={{ opacity: 0.7 }}>¡Sé el primero en compartir un momento especial!</span>
+                </Flex>
             )}
 
             {selectedPhoto && (
                 <Modal onClick={() => setSelectedPhoto(null)}>
                     <ModalButtons>
-                        <button onClick={downloadImage} title="Descargar imagen">
+                        <button 
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                downloadImage();
+                            }} 
+                            title="Descargar imagen"
+                        >
                             <i className="fas fa-download"></i>
                         </button>
-                        <button onClick={() => setSelectedPhoto(null)} title="Cerrar">
+                        <button 
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setSelectedPhoto(null);
+                            }} 
+                            title="Cerrar"
+                        >
                             <i className="fas fa-times"></i>
                         </button>
                     </ModalButtons>

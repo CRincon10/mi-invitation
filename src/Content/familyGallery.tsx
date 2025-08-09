@@ -1,5 +1,6 @@
 import family from "../assets/images/family.jpg";
-import family2 from "../assets/images/family2.jpg";
+// import family2 from "../assets/images/family2.jpg";
+import family2 from "../assets/images/fam1.jpg";
 import family3 from "../assets/images/Boda-001.jpg";
 import { Flex } from "./styled";
 

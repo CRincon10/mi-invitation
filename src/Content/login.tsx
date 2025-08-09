@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getStoredUser, userLogin } from "../firebase/functions";
 import { ContainerLogged, Flex, InputApp } from "./styled";
+import { showErrorAlert } from '../utils/alerts';
 
 const Login: React.FC = () => {
     const [usuario, setUsuario] = useState<string>("");
@@ -23,7 +24,7 @@ const Login: React.FC = () => {
         if (response.success) {
             navigate("/dashboard");
         } else {
-            alert(`❌ Error: ${response.message}`);
+            showErrorAlert('Error de Login', response.message);
         }
     };
 

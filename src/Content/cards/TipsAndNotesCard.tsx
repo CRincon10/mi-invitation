@@ -11,11 +11,11 @@ export const TipsAndNotesCard = () => {
     const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
-    if (lottieRef.current) {
-      // @ts-ignore para evitar el error de typings estrictos
-      lottieRef.current.setSpeed(0.5); // velocidad más lenta
-    }
-  }, []);
+        if (lottieRef.current) {
+            // @ts-ignore para evitar el error de typings estrictos
+            lottieRef.current.setSpeed(0.5); // velocidad más lenta
+        }
+    }, []);
 
     return (
         <>
@@ -51,7 +51,9 @@ export const TipsAndNotesCard = () => {
                                 <span className='fa fa-heart' />
                             </HeartIcon>
                             <ChecklistText>
-                                <strong>Fotos:</strong> La opción de subir fotos estará disponible a partir del 20 de octubre. Agradecemos que suban todas las fotos según la metodología para capturar todos los momentos especiales.
+                                <strong>Fotos:</strong> Nuestra aplicación está pensada para que todos podamos subir y compartir fotos y así guardar juntos los recuerdos más especiales.
+                                A partir del 1 de noviembre estará disponible la opción para subir imágenes.
+                                Te invitamos a que prepares tus fotos y las subas siguiendo la metodología establecida, para que podamos capturar cada momento importante y revivirlos siempre que queramos.
                             </ChecklistText>
                         </ChecklistItem>
                         <ChecklistItem>
@@ -91,7 +93,7 @@ export const TipsAndNotesCard = () => {
                     style={{ width: 100, height: 90, margin: '0 auto' }}
                 />
                 <Info>
-                    <Label>Información adicional para tener en cuenta</Label> 
+                    <Label>Información adicional para tener en cuenta</Label>
                 </Info>
                 <Button onClick={() => setShowModal(true)}>Ver Tips</Button>
             </Card>

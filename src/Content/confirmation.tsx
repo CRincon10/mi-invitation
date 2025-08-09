@@ -5,6 +5,7 @@ import { Button, Label } from './cards/styled';
 import HeartLineComponent from './heartLine';
 import { Modal } from './modal/modal';
 import { Circle, Flex, InputApp, Wrapper } from './styled';
+import { showWeddingConfirmAlert, showRegretAlert, showErrorAlert } from '../utils/alerts';
 
 
 export interface ConfirmedDataState {
@@ -78,11 +79,16 @@ export const Confirmation = () => {
                 setConfirmedData(updatedData);
             }
 
-            alert("Confirmación enviada con éxito");
+            // Mostrar alerta personalizada según asistencia
+            if (confirm.asisteCeremonia || confirm.asisteRecepcion) {
+                await showWeddingConfirmAlert(name);
+            } else {
+                await showRegretAlert(name);
+            }
             setOpenConfirm(false);
         } catch (error) {
             console.error("Error al guardar la confirmación:", error);
-            alert("Hubo un error, intenta nuevamente.");
+            showErrorAlert("Error al confirmar", "Hubo un problema al guardar tu confirmación. Intenta nuevamente.");
         }
         setLoading(false);
     };

@@ -21,42 +21,42 @@ export const photoCategories = [
         name: 'Ceremonia',
         description: 'Momentos de la ceremonia religiosa',
         folder: '/boda/ceremonia',
-        icon: '⛪'
+        icon: 'fas fa-church'
     },
     {
         id: 'recepcion',
         name: 'Recepción',
         description: 'Celebración y fiesta',
         folder: '/boda/recepcion',
-        icon: '🎉'
+        icon: 'fas fa-glass-cheers'
     },
     {
         id: 'novios',
         name: 'Los Novios',
         description: 'Fotos de la pareja',
         folder: '/boda/novios',
-        icon: '💑'
+        icon: 'fas fa-heart'
     },
     {
         id: 'familia',
         name: 'Familia',
         description: 'Momentos familiares',
         folder: '/boda/familia',
-        icon: '👨‍👩‍👧‍👦'
+        icon: 'fas fa-users'
     },
     {
         id: 'amigos',
         name: 'Amigos',
         description: 'Diversión con amigos',
         folder: '/boda/amigos',
-        icon: '👥'
+        icon: 'fas fa-user-friends'
     },
     {
-        id: 'detalles',
-        name: 'Detalles',
-        description: 'Decoración y detalles especiales',
+        id: 'evento',
+        name: 'Fotos con Gafas',
+        description: 'Fotos divertidas con gafas para el video',
         folder: '/boda/detalles',
-        icon: '🌸'
+        icon: 'fas fa-glasses'
     }
 ];
 
