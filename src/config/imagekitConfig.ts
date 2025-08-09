@@ -60,9 +60,6 @@ export const photoCategories = [
     }
 ];
 
-// Almacenamiento local temporal para imágenes (fallback)
-let localImageStorage: { [key: string]: any[] } = {};
-
 // Función para subir imagen a ImageKit con autenticación real
 export const uploadImageToImageKit = async (file: File, folder: string): Promise<any> => {
     try {
@@ -129,87 +126,171 @@ export const uploadImageToImageKit = async (file: File, folder: string): Promise
             type: file.type
         };
         
-        // Guardar en almacenamiento local como backup
-        if (!localImageStorage[folder]) {
-            localImageStorage[folder] = [];
-        }
-        localImageStorage[folder].push(imageData);
-        
-        try {
-            localStorage.setItem('weddingPhotos', JSON.stringify(localImageStorage));
-            console.log('💾 Imagen guardada en localStorage como backup');
-        } catch (storageError) {
-            console.warn('⚠️ No se pudo guardar en localStorage:', storageError);
-        }
-        
         return imageData;
     }
 };
 
-// Función para listar imágenes de ImageKit con autenticación completa
+// Función para listar imágenes de ImageKit con paginación
+export const listImagesFromImageKitPaginated = async (
+    folder: string, 
+    skip: number = 0, 
+    limit: number = 10
+): Promise<{ images: any[], hasMore: boolean, total: number }> => {
+    try {
+        console.log(`📂 Listando imágenes de folder: ${folder}, skip: ${skip}, limit: ${limit}`);
+        
+        // Hacer llamada directa a ImageKit con timeout
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 8000); // 8 segundos timeout
+        
+        try {
+            const authString = btoa(`${IMAGEKIT_PRIVATE_KEY}:`);
+            
+            // Si es la primera página, obtenemos el total primero con una consulta sin límite
+            let totalFiles = 0;
+            if (skip === 0) {
+                const totalResponse = await fetch(`https://api.imagekit.io/v1/files?path=${encodeURIComponent(folder)}&limit=1000`, {
+                    headers: {
+                        'Authorization': `Basic ${authString}`,
+                        'Content-Type': 'application/json'
+                    },
+                    signal: controller.signal
+                });
+                
+                if (totalResponse.ok) {
+                    const allFiles = await totalResponse.json();
+                    totalFiles = allFiles.filter((file: any) => file.fileType === 'image').length;
+                    console.log(`📊 Total de imágenes en ${folder}: ${totalFiles}`);
+                } else {
+                    console.warn('⚠️ No se pudo obtener el total, usando método de estimación');
+                }
+            }
+            
+            // Ahora obtenemos la página específica
+            const response = await fetch(`https://api.imagekit.io/v1/files?path=${encodeURIComponent(folder)}&limit=${limit}&skip=${skip}`, {
+                headers: {
+                    'Authorization': `Basic ${authString}`,
+                    'Content-Type': 'application/json'
+                },
+                signal: controller.signal
+            });
+            
+            clearTimeout(timeoutId);
+            
+            if (response.ok) {
+                const files = await response.json();
+                console.log(`📥 API Response: ${files.length} archivos en esta página (skip: ${skip})`);
+                
+                const images = files
+                    .filter((file: any) => {
+                        const isImage = file.fileType === 'image';
+                        if (!isImage) {
+                            console.log(`🚫 Filtrado archivo no imagen: ${file.name} (${file.fileType})`);
+                        }
+                        return isImage;
+                    })
+                    .map((file: any) => ({
+                        id: file.fileId,
+                        name: file.name,
+                        url: file.url,
+                        thumbnailUrl: `${file.url}?tr=w-300,h-300,c-at_max`,
+                        uploadedAt: new Date(file.createdAt),
+                        category: folder.split('/').pop(),
+                        size: file.size
+                    }));
+                
+                // Determinar si hay más páginas
+                const hasMore = images.length === limit && (totalFiles === 0 || skip + images.length < totalFiles);
+                
+                // Si tenemos el total real, usarlo; si no, estimar
+                const actualTotal = totalFiles > 0 ? totalFiles : skip + images.length + (hasMore ? limit : 0);
+                
+                console.log(`☁️ Cargadas ${images.length} imágenes desde ImageKit para ${folder}`);
+                console.log(`📊 Paginación: skip=${skip}, limit=${limit}, hasMore=${hasMore}, total=${actualTotal}`);
+                
+                return { 
+                    images, 
+                    hasMore, 
+                    total: actualTotal
+                };
+            } else {
+                console.warn(`⚠️ Error ${response.status} desde ImageKit`);
+                return { images: [], hasMore: false, total: 0 };
+            }
+        } catch (error) {
+            clearTimeout(timeoutId);
+            if (error instanceof Error && error.name === 'AbortError') {
+                console.warn('⚠️ Timeout cargando desde ImageKit');
+            } else {
+                console.warn('⚠️ Error conectando con ImageKit:', error);
+            }
+            return { images: [], hasMore: false, total: 0 };
+        }
+        
+    } catch (error) {
+        console.error('❌ Error general listing images:', error);
+        return { images: [], hasMore: false, total: 0 };
+    }
+};
+
+// Función para listar imágenes de ImageKit con autenticación completa (versión original sin paginación)
 export const listImagesFromImageKit = async (folder: string): Promise<any[]> => {
     try {
         console.log('📂 Listando imágenes de folder:', folder);
         
-        // Cargar imágenes locales primero (backup)
-        let localImages: any[] = [];
-        try {
-            const stored = localStorage.getItem('weddingPhotos');
-            if (stored) {
-                localImageStorage = JSON.parse(stored);
-                localImages = localImageStorage[folder] || [];
-                console.log(`💾 Encontradas ${localImages.length} imágenes locales en ${folder}`);
-            }
-        } catch (error) {
-            console.warn('⚠️ Error cargando desde localStorage:', error);
-        }
+        // Hacer llamada directa a ImageKit con timeout
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 8000); // 8 segundos timeout
         
-        // Listar desde ImageKit con autenticación completa
-        let cloudImages: any[] = [];
         try {
             const authString = btoa(`${IMAGEKIT_PRIVATE_KEY}:`);
             const response = await fetch(`https://api.imagekit.io/v1/files?path=${encodeURIComponent(folder)}&limit=100`, {
                 headers: {
                     'Authorization': `Basic ${authString}`,
                     'Content-Type': 'application/json'
-                }
+                },
+                signal: controller.signal
             });
+            
+            clearTimeout(timeoutId);
             
             if (response.ok) {
                 const files = await response.json();
-                cloudImages = files
-                    .filter((file: any) => file.fileType === 'image')
+                console.log(`📥 API Response: ${files.length} archivos totales`);
+                
+                const images = files
+                    .filter((file: any) => {
+                        const isImage = file.fileType === 'image';
+                        if (!isImage) {
+                            console.log(`🚫 Filtrado archivo no imagen: ${file.name} (${file.fileType})`);
+                        }
+                        return isImage;
+                    })
                     .map((file: any) => ({
-                        fileId: file.fileId,
                         id: file.fileId,
-                        url: file.url,
                         name: file.name,
+                        url: file.url,
+                        thumbnailUrl: `${file.url}?tr=w-300,h-300,c-at_max`,
                         uploadedAt: new Date(file.createdAt),
                         category: folder.split('/').pop(),
-                        filePath: file.filePath,
-                        size: file.size,
-                        type: file.fileType,
-                        thumbnailUrl: file.thumbnailUrl
+                        size: file.size
                     }));
-                console.log(`☁️ Encontradas ${cloudImages.length} imágenes en ImageKit`);
+                
+                console.log(`☁️ Cargadas ${images.length} imágenes desde ImageKit para ${folder}`);
+                return images;
             } else {
-                console.warn(`⚠️ Error ${response.status} listando desde ImageKit:`, await response.text());
+                console.warn(`⚠️ Error ${response.status} desde ImageKit`);
+                return [];
             }
         } catch (error) {
-            console.warn('⚠️ Error conectando con ImageKit:', error);
-        }
-        
-        // Combinar imágenes (priorizar las de la nube, agregar locales que no estén)
-        const allImages = [...cloudImages];
-        localImages.forEach(localImg => {
-            // Solo agregar locales si no están ya en la nube
-            if (!allImages.find(cloudImg => cloudImg.name === localImg.name)) {
-                allImages.push(localImg);
+            clearTimeout(timeoutId);
+            if (error instanceof Error && error.name === 'AbortError') {
+                console.warn('⚠️ Timeout cargando desde ImageKit');
+            } else {
+                console.warn('⚠️ Error conectando con ImageKit:', error);
             }
-        });
-        
-        console.log(`✅ Total de imágenes encontradas: ${allImages.length} (${cloudImages.length} nube + ${localImages.filter(local => !cloudImages.find(cloud => cloud.name === local.name)).length} locales)`);
-        return allImages;
+            return [];
+        }
         
     } catch (error) {
         console.error('❌ Error general listing images:', error);

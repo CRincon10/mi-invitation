@@ -6,7 +6,6 @@ import { ImageCarousel } from "./carouselImage";
 import { Confirmation } from "./confirmation";
 import { FamilyGallery } from "./familyGallery";
 import HeaderImage from "./headerImage";
-import MusicPlayer from "./musicPlayer";
 import SaveTheDate from "./saveTheDate";
 import {
     Container,
@@ -94,7 +93,6 @@ export default function Invitacion() {
                 <FamilyGallery />
             </Footer>
             <WeddingCountdown />
-            <MusicPlayer />
         </Container>
     );
 }

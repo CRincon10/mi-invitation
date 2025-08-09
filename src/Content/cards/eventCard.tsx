@@ -21,14 +21,14 @@ export const EventCard: React.FC<EventCardProps> = ({
 }) => {
     return (
         <Card>
+            <Ribbon>{title}</Ribbon>
+            <Divider />
             <Lottie 
                 animationData={icon} 
                 loop 
                 autoplay 
                 style={{ width: 100, height: 120, margin: '0 auto' }} 
             />
-            <Divider />
-            <Ribbon>{title}</Ribbon>
             <Divider />
             <Info>
                 <Label>Lugar:</Label> {place}

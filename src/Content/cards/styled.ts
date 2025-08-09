@@ -21,7 +21,7 @@ export const Title = styled.h2`
 `;
 
 export const Ribbon = styled.div`
-    display: inline-block;
+    display: block;
     position: relative;
     background-color: #7a8b7f;
     color: white;
@@ -29,6 +29,8 @@ export const Ribbon = styled.div`
     font-family: "Satisfy";
     padding: 12px 40px;
     text-align: center;
+    width: 100%;
+    margin: 0 auto;
     clip-path: polygon(
         15px 0%, 
         calc(100% - 15px) 0%, 

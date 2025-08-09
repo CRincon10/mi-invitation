@@ -1,15 +1,38 @@
 import styled from 'styled-components';
 
 export const PhotoAppContainer = styled.div`
-    background: linear-gradient(135deg, #1a3b34 0%, #0d1b0f 100%);
+    background: linear-gradient(135deg, #1a3b34 0%, #0d1b0f 100%) !important;
     min-height: 100vh;
-    height: 100vh;
     color: white;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    -webkit-overflow-scrolling: touch;
     overflow-y: auto;
-    position: relative;
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling en iOS */
-
+    
+    /* Sobrescribir COMPLETAMENTE los estilos del body y globales */
+    background-attachment: local !important;
+    background-size: cover !important;
+    background-image: none !important;
+    background-color: #1a3b34 !important;
+    background-repeat: no-repeat !important;
+    justify-items: center;
+    
+    /* En móviles, asegurar cobertura completa */
     @media (max-width: 768px) {
+        background: linear-gradient(135deg, #1a3b34 0%, #0d1b0f 100%) !important;
+        background-image: none !important;
+        background-color: #1a3b34 !important;
+        min-height: 100vh;
+        min-height: 100dvh;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        height: 100dvh;
     }
 `;
 
@@ -292,7 +315,9 @@ export const ContentSection = styled.div`
     backdrop-filter: blur(10px);
     border-radius: 20px;
     padding: 30px;
+    padding-bottom: 50px; /* Más espacio en la parte inferior */
     border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 30px; /* Espacio adicional al final */
 `;
 
 export const UploadArea = styled.div<{ isDragOver?: boolean }>`
@@ -588,7 +613,7 @@ export const ModalImage = styled.img`
 
 export const ModalCloseButton = styled.button`
     position: absolute;
-    top: 20px;
+    top: 90px;
     right: 20px;
     background: rgba(0, 0, 0, 0.7);
     border: none;
@@ -608,34 +633,65 @@ export const ModalCloseButton = styled.button`
         background: rgba(0, 0, 0, 0.9);
         transform: scale(1.1);
     }
+    
+    @media (max-width: 768px) {
+        top: 80px;
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+    }
 `;
 
 export const ModalActions = styled.div`
     position: absolute;
-    bottom: 30px;
+    top: 30px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     gap: 15px;
+    z-index: 20002;
+    
+    @media (max-width: 768px) {
+        top: 20px;
+        gap: 10px;
+    }
 `;
 
 export const ModalActionButton = styled.button`
-    background: rgba(185, 157, 121, 0.9);
-    border: none;
+    background: rgba(185, 157, 121, 1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 25px;
     padding: 12px 20px;
     color: white;
     cursor: pointer;
     font-size: 16px;
+    font-weight: 700;
     display: flex;
     align-items: center;
     gap: 8px;
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    min-width: 120px;
+    justify-content: center;
 
     &:hover {
-        background: rgba(185, 157, 121, 1);
-        transform: translateY(-2px);
+        background: rgba(195, 167, 131, 1);
+        transform: translateY(-2px) scale(1.05);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+        border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    i {
+        font-size: 14px;
+        font-weight: 900;
+    }
+    
+    @media (max-width: 768px) {
+        padding: 10px 16px;
+        font-size: 14px;
+        min-width: 100px;
     }
 `;
 
@@ -700,6 +756,7 @@ export const BackToAppButton = styled.button`
     text-align: center;
     justify-content: center;
     align-items: center;
+    gap: 8px;
 
     &:hover {
         background: linear-gradient(135deg, #1a3b34 0%, #0d2a24 100%);
@@ -750,5 +807,38 @@ export const SkeletonGrid = styled.div`
     @media (max-width: 768px) {
         grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
         gap: 8px;
+    }
+`;
+
+export const LoadMoreButton = styled.button`
+    background: linear-gradient(135deg, #b99d79 0%, #a78564 100%);
+    border: none;
+    border-radius: 25px;
+    padding: 12px 24px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 20px auto;
+    display: block;
+    min-width: 160px;
+    font-size: 16px;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(185, 157, 121, 0.4);
+    }
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+        background: rgba(185, 157, 121, 0.5);
+    }
+
+    @media (max-width: 768px) {
+        padding: 10px 20px;
+        font-size: 14px;
+        min-width: 140px;
     }
 `;

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { logoutUser } from "../firebase/functions";
 import { db } from "../firebaseConfig";
 import FilterToggle from "../inputs/toggle";
-import { Button } from "./cards/styled";
+import { Button, Label } from "./cards/styled";
 import { ConfirmedDataState } from "./confirmation";
 import { Modal } from "./modal/modal";
 import { ConfirmacionesContainer, ContainerLogged, Flex, IconWrapper, InputApp, SelectWrapper, StyledOption, StyledSelect } from "./styled";
@@ -15,7 +15,8 @@ export const Dashboard = () => {
     const [filtro, setFiltro] = useState<"todos" | "asistentes" | "no-asistentes">("todos");
     const [showManualForm, setShowManualForm] = useState(false);
     const [manualName, setManualName] = useState("");
-    const [manualConfirm, setManualConfirm] = useState<boolean | undefined>(undefined);
+    const [manualConfirmCeremonia, setManualConfirmCeremonia] = useState<boolean | undefined>(undefined);
+    const [manualConfirmRecepcion, setManualConfirmRecepcion] = useState<boolean | undefined>(undefined);
     const [manualCompanion, setManualCompanion] = useState("");
 
     useEffect(() => {
@@ -57,12 +58,12 @@ export const Dashboard = () => {
     const handleManualAdd = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (!manualName || manualConfirm === undefined) return;
+        if (!manualName || manualConfirmCeremonia === undefined || manualConfirmRecepcion === undefined) return;
 
         const confirmationData = {
             nombre: manualName,
-            asisteCeremonia: manualConfirm,
-            asisteRecepcion: manualConfirm, // Asumiendo que la respuesta es la misma para ambos
+            asisteCeremonia: manualConfirmCeremonia,
+            asisteRecepcion: manualConfirmRecepcion,
             fechaConfirmacion: serverTimestamp(),
             acompanante: !!manualCompanion,
             nombreAcompanante: manualCompanion || null,
@@ -78,9 +79,12 @@ export const Dashboard = () => {
                 fechaConfirmacion: { seconds: new Date().getTime() / 1000 }
             };
 
-            // Agregarlo a la lista de confirmaciones en pantalla (simulación, ya que serverTimestamp() se resuelve en el backend)
+            // Agregarlo a la lista de confirmaciones en pantalla
             setConfirmaciones([...confirmaciones, newConfirmation]);
             setManualName("");
+            setManualCompanion("");
+            setManualConfirmCeremonia(undefined);
+            setManualConfirmRecepcion(undefined);
 
             alert("Invitado agregado con éxito");
             setShowManualForm(false);
@@ -101,21 +105,50 @@ export const Dashboard = () => {
                         <Flex column paddingRight={20} paddingBottom={50} paddingLeft={20} spaceBetween>
                             <Flex column gap20>
                                 <form onSubmit={handleManualAdd}>
-                                    <InputApp type="text" placeholder="Nombre" value={manualName} onChange={(e) => setManualName(e.target.value)} required />
-                                    <InputApp type="text" placeholder="Nombre del acompañante (opcional)" value={manualCompanion} onChange={(e) => setManualCompanion(e.target.value)} />
+                                    <InputApp 
+                                        type="text" 
+                                        placeholder="Nombre" 
+                                        value={manualName} 
+                                        onChange={(e) => setManualName(e.target.value)} 
+                                        required 
+                                    />
+                                    <InputApp 
+                                        type="text" 
+                                        placeholder="Nombre del acompañante (opcional)" 
+                                        value={manualCompanion} 
+                                        onChange={(e) => setManualCompanion(e.target.value)} 
+                                    />
+                                    
+                                    <Label style={{ marginTop: "10px", marginBottom: "5px" }}>Asistencia a la Ceremonia:</Label>
                                     <SelectWrapper>
                                         <StyledSelect
-                                            value={manualConfirm !== undefined ? manualConfirm.toString() : ""}
-                                            onChange={(e) => setManualConfirm(e.target.value === "true")}
+                                            value={manualConfirmCeremonia !== undefined ? manualConfirmCeremonia.toString() : ""}
+                                            onChange={(e) => setManualConfirmCeremonia(e.target.value === "true")}
                                         >
-                                            <StyledOption value="">Selecciona asistencia</StyledOption>
-                                            <StyledOption value="true">Asiste</StyledOption>
-                                            <StyledOption value="false">No asiste</StyledOption>
+                                            <StyledOption value="">Selecciona para ceremonia</StyledOption>
+                                            <StyledOption value="true">Asiste a ceremonia</StyledOption>
+                                            <StyledOption value="false">No asiste a ceremonia</StyledOption>
                                         </StyledSelect>
                                         <IconWrapper>
                                             <span className="fa-regular fa-chevron-down" />
                                         </IconWrapper>
                                     </SelectWrapper>
+
+                                    <Label style={{ marginTop: "10px", marginBottom: "5px" }}>Asistencia a la Recepción:</Label>
+                                    <SelectWrapper>
+                                        <StyledSelect
+                                            value={manualConfirmRecepcion !== undefined ? manualConfirmRecepcion.toString() : ""}
+                                            onChange={(e) => setManualConfirmRecepcion(e.target.value === "true")}
+                                        >
+                                            <StyledOption value="">Selecciona para recepción</StyledOption>
+                                            <StyledOption value="true">Asiste a recepción</StyledOption>
+                                            <StyledOption value="false">No asiste a recepción</StyledOption>
+                                        </StyledSelect>
+                                        <IconWrapper>
+                                            <span className="fa-regular fa-chevron-down" />
+                                        </IconWrapper>
+                                    </SelectWrapper>
+                                    
                                     <Button type="submit">Guardar Invitado</Button>
                                 </form>
                             </Flex>
@@ -127,24 +160,30 @@ export const Dashboard = () => {
                 Panel de Confirmaciones
             </h1>
 
-            <Flex w100 column alignCenter gap20 style={{ maxWidth: "500px", margin: "0 auto" }}>
-                <Flex justifyEnd alignEnd  w100 gap5>
+            <Flex w100 column alignCenter gap20 style={{ maxWidth: "800px", margin: "0 auto", padding: "0 20px" }}>
+                {/* Barra de búsqueda y botón agregar */}
+                <Flex w100 columnMobile gap10 alignCenter>
                     <InputApp
                         type="text"
                         placeholder="Buscar por nombre..."
                         value={filtroNombre}
                         onChange={(e) => setFiltroNombre(e.target.value)}
                         style={{
-                            width: "100%",
+                            flex: "1",
+                            minWidth: "200px",
                             padding: "12px",
                             fontSize: "16px",
                             borderRadius: "8px",
                             border: "1px solid #ccc",
                         }}
                     />
-                    <Flex gap5 maxHeight={50} marginTop={10} alignEnd justifyEnd>
-                        <Button className="small" onClick={() => setShowManualForm(!showManualForm)}>Agregar Invitado</Button>
-                    </Flex>
+                    <Button 
+                        className="small" 
+                        onClick={() => setShowManualForm(!showManualForm)}
+                        style={{ whiteSpace: "nowrap", minWidth: "140px" }}
+                    >
+                        Agregar Invitado
+                    </Button>
                 </Flex>
 
                 <FilterToggle
@@ -154,34 +193,72 @@ export const Dashboard = () => {
                     attends={confirmaciones.reduce((total, c) => total + (c.asisteCeremonia ? (c.nombreAcompanante ? 2 : 1) : 0), 0)}
                     noAttends={confirmaciones.reduce((total, c) => total + (!c.asisteCeremonia ? (c.nombreAcompanante ? 2 : 1) : 0), 0)}
                 />
-            </Flex>
-            <Flex w100 style={{ maxWidth: "500px", margin: "0 auto" }}>
-                <ConfirmacionesContainer>
-                    <ol>
+
+                {/* Lista de confirmaciones */}
+                <ConfirmacionesContainer style={{ width: "100%" }}>
+                    <ol style={{ padding: "0", margin: "0" }}>
                         {confirmacionesFiltradas.length > 0 ? (
                             confirmacionesFiltradas.map((confirm, index) => {
                                 return (
-                                    <Flex alignCenter gap10>
-                                        <li key={index}>
-                                            <Flex column w100>
-                                                <span> {confirm.nombre}
-                                                    {confirm.nombreAcompanante && ` y ${confirm.nombreAcompanante}`}
+                                    <li key={confirm.id || index} style={{ marginBottom: "20px", listStyle: "none" }}>
+                                        <Flex column w100 gap5 style={{ 
+                                            padding: "16px", 
+                                            border: "1px solid #e0e0e0", 
+                                            borderRadius: "8px",
+                                            backgroundColor: "#fff",
+                                            boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
+                                        }}>
+                                            {/* Nombre principal y acompañante */}
+                                            <Flex column>
+                                                <span style={{ fontWeight: "bold", fontSize: "18px", color: "#b19776", marginBottom: "4px" }}>
+                                                    {confirm.nombre}
                                                 </span>
-
-                                                <span className={confirm.asisteCeremonia ? "asiste" : "no-asiste"}>
-                                                    {confirm.asisteCeremonia ? (confirm.nombreAcompanante ? "Asisten ✅" : "Asiste ✅") : (confirm.nombreAcompanante ? "No asisten ❌" : "No asiste ❌")}
-                                                </span>
-                                                <span>
-                                                    Fecha de confirmación: {moment.unix(confirm.fechaConfirmacion.seconds).format("DD/MM/YYYY")}
-                                                </span>
-
+                                                {confirm.acompanante && confirm.nombreAcompanante && (
+                                                    <span style={{ fontWeight: "bold", fontSize: "16px", color: "#b19776", marginLeft: "0px" }}>
+                                                        + {confirm.nombreAcompanante}
+                                                    </span>
+                                                )}
                                             </Flex>
-                                        </li>
-                                    </Flex>
+
+                                            {/* Estado de asistencia */}
+                                            <Flex columnMobile gap10 style={{ marginTop: "12px" }}>
+                                                <Flex alignCenter gap10 style={{ minWidth: "150px" }}>
+                                                    <span style={{ fontSize: "14px", fontWeight: "500", minWidth: "70px" }}>Ceremonia:</span>
+                                                    <span className={confirm.asisteCeremonia ? "asiste" : "no-asiste"}>
+                                                        {confirm.asisteCeremonia ? "✅ Asiste" : "❌ No asiste"}
+                                                    </span>
+                                                </Flex>
+                                                <Flex alignCenter gap10 style={{ minWidth: "150px" }}>
+                                                    <span style={{ fontSize: "14px", fontWeight: "500", minWidth: "70px" }}>Recepción:</span>
+                                                    <span className={confirm.asisteRecepcion ? "asiste" : "no-asiste"}>
+                                                        {confirm.asisteRecepcion ? "✅ Asiste" : "❌ No asiste"}
+                                                    </span>
+                                                </Flex>
+                                            </Flex>
+
+                                            {/* Información adicional */}
+                                            <Flex columnMobile gap5 style={{ 
+                                                marginTop: "12px", 
+                                                padding: "12px", 
+                                                backgroundColor: "rgba(177, 151, 118, 0.1)", 
+                                                borderRadius: "6px" 
+                                            }}>
+                                                <span style={{ fontSize: "12px", color: "#666" }}>
+                                                    <strong>Total personas:</strong> {confirm.acompanante && confirm.nombreAcompanante ? 2 : 1}
+                                                </span>
+                                                <span style={{ fontSize: "12px", color: "#666" }}>
+                                                    <strong>Confirmado:</strong> {moment.unix(confirm.fechaConfirmacion.seconds).format("DD/MM/YYYY HH:mm")}
+                                                </span>
+                                                <span style={{ fontSize: "12px", color: "#666", wordBreak: "break-all" }}>
+                                                    <strong>ID:</strong> {confirm.id}
+                                                </span>
+                                            </Flex>
+                                        </Flex>
+                                    </li>
                                 )
                             })
                         ) : (
-                            <p className="no-confirmaciones">
+                            <p className="no-confirmaciones" style={{ textAlign: "center", padding: "40px", color: "#666" }}>
                                 No hay confirmaciones registradas.
                             </p>
                         )}

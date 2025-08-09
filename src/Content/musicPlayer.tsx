@@ -25,7 +25,8 @@ export default function MusicPlayer() {
                 position: "fixed",
                 bottom: "20px",
                 right: "20px",
-                zIndex: 9999,
+                zIndex: 99999,
+                pointerEvents: "auto",
             }}
         >
             <audio ref={audioRef} src="/audio.mp3" loop />
@@ -41,6 +42,7 @@ export default function MusicPlayer() {
                     boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
                     backdropFilter: "blur(6px)",
                     color: "#333",
+                    pointerEvents: "auto",
                 }}
             >
                 <span  className={`color-gold fas ${isPlaying ? "fa-volume-xmark" : "fa-volume-up"}`} />

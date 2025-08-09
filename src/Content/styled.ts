@@ -132,6 +132,13 @@ export const Flex = styled.div<FlexProps>`
     ${({ border }) => border && "border: 1px solid black;"}
 
     ${({ border }) => border && "border: 1px solid  ;"}
+
+    /* Responsive columnMobile */
+    ${({ columnMobile }) => columnMobile && `
+        @media (max-width: 768px) {
+            flex-direction: column;
+        }
+    `}
 `;
 
 export const Container = styled.div`
@@ -428,38 +435,18 @@ export const ConfirmacionesContainer = styled.div`
     width: 100%;
     border-radius: 10px;
 
-    ol {
-        font-size: 18px;
-        color: #333;
-        line-height: 1.8;
-        gap: 10px;
-    }
-
-    li {
-        background: #f8f8f8;
-        padding: 10px;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        width: 100%;
-        gap: 10px;
-        margin-bottom: 5px;
+    @media (max-width: 768px) {
+        padding: 5px;
     }
 
     .asiste {
-        font-weight: bold;
-        color: green;
+        color: #1a3b34;
+        font-weight: 500;
     }
 
     .no-asiste {
-        font-weight: bold;
-        color: red;
-    }
-
-    .no-confirmaciones {
-        text-align: center;
-        font-size: 18px;
-        color: #888;
+        color: #f44336;
+        font-weight: 500;
     }
 `;
 
