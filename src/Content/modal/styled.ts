@@ -36,7 +36,7 @@ export const ModalContent = styled.div`
 `;
 
 export const CloseButton = styled.div`
-    background: rgba(85, 85, 85, 0.8);
+    background: rgba(177, 176, 176, 0.8);
     border: none;
     font-size: 20px;
     color: white;
@@ -79,7 +79,7 @@ export const ModalHeader = styled.div`
     background-repeat: repeat;
     background-position: center;
     background-color: transparent;
-    border-bottom: 2px solid #b99d79;
+    border-bottom: 2px solid #e6d9c9ff;
     padding: 20px;
     display: flex;
     align-items: center;
