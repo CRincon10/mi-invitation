@@ -31,7 +31,11 @@ export const VideoAndPhotosCard = () => {
                 <Info>
                     <Label>No queremos perdernos ningún momento de este hermoso día</Label>
                 </Info>
-                <Button onClick={handleOpenPhotos}>
+                <Button 
+                    id="gallery-button"
+                    data-gallery-button="true"
+                    onClick={handleOpenPhotos}
+                >
                     {isAvailable ? "Abrir Galería" : "Ver Información"}
                 </Button>
             </Card>

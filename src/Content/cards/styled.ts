@@ -65,23 +65,43 @@ export const Button = styled.button<ButtonProps>`
     margin-top: 24px;
     background-color: #b99d79;
     color: white;
-    border: none;
+    border: 2px solid rgba(255, 255, 255, 0.2);
     padding: 12px 24px;
     border-radius: 8px;
     width: ${(props) => (props.w100 ? "100%" : "auto")};
     cursor: pointer;
-    transition: background-color 0.3s;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.2),
+        0 2px 6px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
     font-size: 20px !important;
     font-family: 'Lora', serif;
+    font-weight: 600;
 
     &:hover {
         background-color: #a78564;
+        transform: translateY(-2px);
+        box-shadow: 
+            0 6px 16px rgba(0, 0, 0, 0.25),
+            0 3px 8px rgba(0, 0, 0, 0.15),
+            inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    &:active {
+        transform: translateY(0);
+        box-shadow: 
+            0 2px 8px rgba(0, 0, 0, 0.2),
+            inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
 
     &:disabled {
         background-color: #ccc;
         cursor: not-allowed;
+        transform: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        border-color: rgba(255, 255, 255, 0.1);
     }
 `;
 

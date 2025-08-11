@@ -51,9 +51,9 @@ export const TipsAndNotesCard = () => {
                                 <span className='fa fa-heart' />
                             </HeartIcon>
                             <ChecklistText>
-                                <strong>Fotos:</strong> Nuestra aplicación está pensada para que todos podamos subir y compartir fotos y así guardar juntos los recuerdos más especiales.
-                                A partir del 1 de noviembre estará disponible la opción para subir imágenes.
-                                Te invitamos a que prepares tus fotos y las subas siguiendo la metodología establecida, para que podamos capturar cada momento importante y revivirlos siempre que queramos.
+                                <strong>Fotos:</strong> En la sección Galería de nuestra aplicación podrás subir y compartir fotos para que todos disfrutemos y guardemos juntos los recuerdos más especiales.
+                                A partir del 1 de noviembre esta función estará disponible.
+                                Te invitamos a preparar tus fotos y subirlas siguiendo la metodología indicada, para que podamos capturar cada momento importante y revivirlo cuando queramos.
                             </ChecklistText>
                         </ChecklistItem>
                         <ChecklistItem>
