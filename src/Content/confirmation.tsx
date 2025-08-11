@@ -96,8 +96,8 @@ export const Confirmation = () => {
     return (
         <Wrapper>
             {openConfirm && (
-                <Modal isOpen={openConfirm} onClose={() => setOpenConfirm(false)}>
-                    <Flex column onClick={(e) => e.stopPropagation()}>
+                <Modal isOpen={openConfirm} onClose={() => setOpenConfirm(false)} title="Confirmación">
+                    <Flex column onClick={(e) => e.stopPropagation()} style={{ textAlign: 'left', alignItems: 'flex-start' }}>
                         {confirmedData ?
                             <Flex column padding={20}>
                                 <span className="color-app" style={{ fontSize: "40px" }}>
@@ -111,7 +111,7 @@ export const Confirmation = () => {
                             </Flex>
                             : (
                                 <Flex column paddingRight={10} paddingBottom={50} paddingLeft={10} spaceBetween>
-                                    <Flex column gap10>
+                                    <Flex column gap10 marginTop={20}>
                                         <span>Compartenos tus datos personales para la confirmación:</span>
                                         <InputApp
                                             className="input-confirmation"
@@ -119,7 +119,7 @@ export const Confirmation = () => {
                                             placeholder="Nombre completo"
                                             value={name}
                                             onChange={(e) => setName(e.target.value)}
-                                            autoFocus
+                                            // autoFocus
                                             style={{ fontSize: "18px" }}
                                         />
                                         <Flex alignCenter gap10>

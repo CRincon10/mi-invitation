@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import { Modal } from '../modal/modal';
-import { Flex } from '../styled';
 import { Button, Card, ChecklistContainer, ChecklistItem, ChecklistText, HeartIcon, Info, Label, Ribbon } from './styled';
 import Lottie from 'lottie-react';
 import note from '../../assets/animations/note.json';
@@ -19,8 +18,8 @@ export const TipsAndNotesCard = () => {
 
     return (
         <>
-            <Modal isOpen={showModal} onClose={() => setShowModal(false)} >
-                <Flex column gap={20}>
+            <Modal isOpen={showModal} onClose={() => setShowModal(false)} title="Tips y Notas" >
+                <div style={{ textAlign: 'left', marginTop: '20px' }}>
                     <ChecklistContainer>
                         <ChecklistItem>
                             <HeartIcon>
@@ -81,7 +80,7 @@ export const TipsAndNotesCard = () => {
                             </ChecklistText>
                         </ChecklistItem>
                     </ChecklistContainer>
-                </Flex>
+                </div>
             </Modal>
             <Card>
                 <Ribbon>Tips y Notas </Ribbon>
