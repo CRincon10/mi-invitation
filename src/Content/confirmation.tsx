@@ -87,7 +87,6 @@ export const Confirmation = () => {
             }
             setOpenConfirm(false);
         } catch (error) {
-            console.error("Error al guardar la confirmación:", error);
             showErrorAlert("Error al confirmar", "Hubo un problema al guardar tu confirmación. Intenta nuevamente.");
         }
         setLoading(false);

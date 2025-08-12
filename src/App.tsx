@@ -7,14 +7,8 @@ import CategoryView from "./Content/categories/CategoryView";
 import MusicPlayer from "./Content/musicPlayer";
 import GlobalStyle from "./globalStyles";
 import ProtectedRoute from "./Routes/protectedRoutes";
-import { useEffect } from "react";
-import { auth } from "./firebaseConfig";
 
 const App: React.FC = () => {
-    useEffect(() => {
-        console.log("Firebase inicializado:", auth);
-        console.log("API Key:", process.env.REACT_APP_FIREBASE_API_KEY); // Debería imprimir la API Key
-    }, []);
     return (
         <>
             <GlobalStyle />

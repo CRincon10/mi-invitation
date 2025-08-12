@@ -19,14 +19,14 @@ export const TipsAndNotesCard = () => {
     return (
         <>
             <Modal isOpen={showModal} onClose={() => setShowModal(false)} title="Tips y Notas" >
-                <div style={{ textAlign: 'left', marginTop: '20px' }}>
+                <div style={{ textAlign: 'left', marginTop: '20px', paddingBottom: '160px' }}>
                     <ChecklistContainer>
                         <ChecklistItem>
                             <HeartIcon>
                                 <span className='fa fa-heart' />
                             </HeartIcon>
                             <ChecklistText>
-                                <strong>Código de vestimenta:</strong> Vístete como te sientas cómodo. Lo importante es que nos acompañes en este momento tan especial.
+                                <strong>Código de vestimenta:</strong> Formal, en el estilo que prefieras. Queremos que te sientas cómodo(a), pero acorde a la importancia de esta ocasión especial.
                             </ChecklistText>
                         </ChecklistItem>
                         <ChecklistItem>

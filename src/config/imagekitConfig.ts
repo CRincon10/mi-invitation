@@ -63,8 +63,6 @@ export const photoCategories = [
 // Función para subir imagen a ImageKit con autenticación real
 export const uploadImageToImageKit = async (file: File, folder: string): Promise<any> => {
     try {
-        console.log('Iniciando subida real a ImageKit:', file.name, folder);
-        
         // Crear FormData para la subida con autenticación
         const formData = new FormData();
         formData.append('file', file);
@@ -87,30 +85,27 @@ export const uploadImageToImageKit = async (file: File, folder: string): Promise
         
         if (response.ok) {
             const result = await response.json();
-            console.log('✅ Subida exitosa a ImageKit:', result);
             
             return {
                 fileId: result.fileId,
                 name: result.name,
                 url: result.url,
                 filePath: result.filePath,
-                thumbnailUrl: result.thumbnailUrl,
+                thumbnailUrl: `${result.url}?tr=w-300,h-300,c-at_max`,
                 uploadedAt: new Date(result.createdAt),
                 category: folder.split('/').pop(),
                 size: result.size,
-                type: result.fileType
+                // Propiedades adicionales para compatibilidad con la interfaz Photo
+                id: result.fileId
             };
         } else {
             const errorText = await response.text();
-            console.error('❌ Error en la respuesta de ImageKit:', response.status, errorText);
             throw new Error(`ImageKit upload failed: ${response.status} - ${errorText}`);
         }
         
     } catch (error) {
-        console.error('❌ Error uploading to ImageKit:', error);
         
         // Fallback: usar almacenamiento local si falla ImageKit
-        console.log('🔄 Usando fallback local para la imagen:', file.name);
         
         const imageId = `local_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
         const imageUrl = URL.createObjectURL(file);
@@ -137,8 +132,6 @@ export const listImagesFromImageKitPaginated = async (
     limit: number = 10
 ): Promise<{ images: any[], hasMore: boolean, total: number }> => {
     try {
-        console.log(`📂 Listando imágenes de folder: ${folder}, skip: ${skip}, limit: ${limit}`);
-        
         // Hacer llamada directa a ImageKit con timeout
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 8000); // 8 segundos timeout
@@ -159,15 +152,12 @@ export const listImagesFromImageKitPaginated = async (
                 
                 if (totalResponse.ok) {
                     const allFiles = await totalResponse.json();
-                    totalFiles = allFiles.filter((file: any) => file.fileType === 'image').length;
-                    console.log(`📊 Total de imágenes en ${folder}: ${totalFiles}`);
-                } else {
-                    console.warn('⚠️ No se pudo obtener el total, usando método de estimación');
+                    totalFiles = allFiles.filter((file: any) => file.fileType === 'image' || file.fileType === 'video').length;
                 }
             }
             
-            // Ahora obtenemos la página específica
-            const response = await fetch(`https://api.imagekit.io/v1/files?path=${encodeURIComponent(folder)}&limit=${limit}&skip=${skip}`, {
+            // Ahora obtenemos la página específica ordenada por fecha descendente (más recientes primero)
+            const response = await fetch(`https://api.imagekit.io/v1/files?path=${encodeURIComponent(folder)}&limit=${limit}&skip=${skip}&sort=DESC_CREATED`, {
                 headers: {
                     'Authorization': `Basic ${authString}`,
                     'Content-Type': 'application/json'
@@ -179,34 +169,28 @@ export const listImagesFromImageKitPaginated = async (
             
             if (response.ok) {
                 const files = await response.json();
-                console.log(`📥 API Response: ${files.length} archivos en esta página (skip: ${skip})`);
                 
                 const images = files
-                    .filter((file: any) => {
-                        const isImage = file.fileType === 'image';
-                        if (!isImage) {
-                            console.log(`🚫 Filtrado archivo no imagen: ${file.name} (${file.fileType})`);
-                        }
-                        return isImage;
-                    })
                     .map((file: any) => ({
-                        id: file.fileId,
+                        fileId: file.fileId,
                         name: file.name,
                         url: file.url,
                         thumbnailUrl: `${file.url}?tr=w-300,h-300,c-at_max`,
                         uploadedAt: new Date(file.createdAt),
                         category: folder.split('/').pop(),
-                        size: file.size
+                        size: file.size,
+                        customMetadata: file.customMetadata,
+                        tags: file.tags,
+                        fileType: file.fileType, // Conservamos el original
+                        originalFileType: file.fileType // Para debug
                     }));
                 
-                // Determinar si hay más páginas
-                const hasMore = images.length === limit && (totalFiles === 0 || skip + images.length < totalFiles);
+                // Determinar si hay más páginas (simplificado)
+                // Si obtuvimos exactamente el límite solicitado, probablemente hay más
+                const hasMore = images.length === limit;
                 
                 // Si tenemos el total real, usarlo; si no, estimar
                 const actualTotal = totalFiles > 0 ? totalFiles : skip + images.length + (hasMore ? limit : 0);
-                
-                console.log(`☁️ Cargadas ${images.length} imágenes desde ImageKit para ${folder}`);
-                console.log(`📊 Paginación: skip=${skip}, limit=${limit}, hasMore=${hasMore}, total=${actualTotal}`);
                 
                 return { 
                     images, 
@@ -214,21 +198,17 @@ export const listImagesFromImageKitPaginated = async (
                     total: actualTotal
                 };
             } else {
-                console.warn(`⚠️ Error ${response.status} desde ImageKit`);
                 return { images: [], hasMore: false, total: 0 };
             }
         } catch (error) {
             clearTimeout(timeoutId);
             if (error instanceof Error && error.name === 'AbortError') {
-                console.warn('⚠️ Timeout cargando desde ImageKit');
             } else {
-                console.warn('⚠️ Error conectando con ImageKit:', error);
             }
             return { images: [], hasMore: false, total: 0 };
         }
         
     } catch (error) {
-        console.error('❌ Error general listing images:', error);
         return { images: [], hasMore: false, total: 0 };
     }
 };
@@ -236,7 +216,6 @@ export const listImagesFromImageKitPaginated = async (
 // Función para listar imágenes de ImageKit con autenticación completa (versión original sin paginación)
 export const listImagesFromImageKit = async (folder: string): Promise<any[]> => {
     try {
-        console.log('📂 Listando imágenes de folder:', folder);
         
         // Hacer llamada directa a ImageKit con timeout
         const controller = new AbortController();
@@ -256,15 +235,11 @@ export const listImagesFromImageKit = async (folder: string): Promise<any[]> => 
             
             if (response.ok) {
                 const files = await response.json();
-                console.log(`📥 API Response: ${files.length} archivos totales`);
                 
                 const images = files
                     .filter((file: any) => {
-                        const isImage = file.fileType === 'image';
-                        if (!isImage) {
-                            console.log(`🚫 Filtrado archivo no imagen: ${file.name} (${file.fileType})`);
-                        }
-                        return isImage;
+                        const isMediaFile = file.fileType === 'image' || file.fileType === 'video';
+                        return isMediaFile;
                     })
                     .map((file: any) => ({
                         id: file.fileId,
@@ -273,27 +248,23 @@ export const listImagesFromImageKit = async (folder: string): Promise<any[]> => 
                         thumbnailUrl: `${file.url}?tr=w-300,h-300,c-at_max`,
                         uploadedAt: new Date(file.createdAt),
                         category: folder.split('/').pop(),
-                        size: file.size
+                        size: file.size,
+                        fileType: file.fileType
                     }));
                 
-                console.log(`☁️ Cargadas ${images.length} imágenes desde ImageKit para ${folder}`);
                 return images;
             } else {
-                console.warn(`⚠️ Error ${response.status} desde ImageKit`);
                 return [];
             }
         } catch (error) {
             clearTimeout(timeoutId);
             if (error instanceof Error && error.name === 'AbortError') {
-                console.warn('⚠️ Timeout cargando desde ImageKit');
             } else {
-                console.warn('⚠️ Error conectando con ImageKit:', error);
             }
             return [];
         }
         
     } catch (error) {
-        console.error('❌ Error general listing images:', error);
         return [];
     }
 };

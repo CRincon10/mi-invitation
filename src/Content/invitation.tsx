@@ -39,7 +39,7 @@ export default function Invitacion() {
             </TitleContent>
             <Flex column gap10 alignCenter justifyCenter maxWidth={340} style={{ textAlign: "center", margin: "20px auto" }}>
                 <span className="bold">¡Nos casamos!</span>
-                <span> Queremos compartir este momento tan especial contigo, que eres parte importante de nuestra historia. </span>
+                <span>Porque eres parte importante de nuestra historia, queremos compartir este momento tan especial contigo.</span>
             </Flex>
             <SaveTheDate />
             <Flex alignCenter justifyCenter maxWidth={500} padding={20}>

@@ -30,7 +30,6 @@ export const Dashboard = () => {
                 }));
                 setConfirmaciones(data);
             } catch (error) {
-                console.error("Error obteniendo confirmaciones:", error);
             }
         };
 
@@ -90,7 +89,6 @@ export const Dashboard = () => {
             showSuccessAlert("¡Invitado agregado!", "La confirmación se guardó correctamente.");
             setShowManualForm(false);
         } catch (error) {
-            console.error("Error al guardar el invitado:", error);
             showErrorAlert("Error al guardar", "Hubo un problema. Intenta nuevamente.");
         }
     };

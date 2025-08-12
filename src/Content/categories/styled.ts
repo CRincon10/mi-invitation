@@ -263,6 +263,16 @@ export const Modal = styled.div`
     justify-content: center;
     align-items: center;
     padding: 20px;
+    touch-action: pan-x; /* Permitir swipe horizontal pero no scroll vertical */
+    overscroll-behavior: none; /* Prevenir scroll en el contenido de abajo */
+    overflow: hidden; /* Prevenir cualquier overflow */
+    
+    /* Asegurar que el modal capture todos los eventos */
+    -webkit-overflow-scrolling: touch;
+    
+    @media (max-width: 768px) {
+        padding: 10px;
+    }
 `;
 
 export const ModalButtons = styled.div`
@@ -287,6 +297,7 @@ export const ModalButtons = styled.div`
         justify-content: center;
         transition: all 0.3s ease;
         backdrop-filter: blur(10px);
+        touch-action: manipulation; /* Optimizar para touch */
         
         &:hover {
             background: rgba(0, 0, 0, 0.9);
@@ -294,8 +305,27 @@ export const ModalButtons = styled.div`
             border-color: rgba(255, 255, 255, 0.25);
         }
         
+        &:active {
+            transform: scale(0.95);
+        }
+        
         i {
             font-size: 16px;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        top: 15px;
+        right: 15px;
+        
+        button {
+            width: 40px;
+            height: 40px;
+            padding: 10px;
+            
+            i {
+                font-size: 14px;
+            }
         }
     }
 `;
@@ -305,6 +335,16 @@ export const ModalImage = styled.img`
     max-height: 100%;
     object-fit: contain;
     border-radius: 8px;
+    touch-action: none; /* Prevenir zoom/pan en la imagen */
+    user-select: none; /* Prevenir selección */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    
+    @media (max-width: 768px) {
+        max-width: calc(100vw - 20px);
+        max-height: calc(100vh - 100px); /* Dejar espacio para los controles */
+    }
 `;
 
 export const LoadMoreButton = styled.button`
