@@ -202,7 +202,7 @@ export const Confirmation = () => {
                                         </Flex>
                                     </Flex>
                                     {confirm.asisteRecepcion &&
-                                        <Flex gap10 w100 marginTop={50} column>
+                                        <Flex gap10 w100 marginTop={50} column alignCenter>
                                             <i className="fa-regular fa-envelope color-app" style={{ fontSize: "60px" }} />
                                             <Flex flexWrap justifyCenter textAlignCenter>
                                                 <span style={{ fontSize: "18px" }} className="color-app">
@@ -212,7 +212,7 @@ export const Confirmation = () => {
                                             </Flex>
                                         </Flex>
                                     }
-                                    <Flex marginTop={30}>
+                                    <Flex marginTop={30} marginBottom={30}>
                                         <Button w100 className={isButtonDisabled ? "disabled" : ""} disabled={isButtonDisabled} onClick={() => handleConfirm()} style={{ marginTop: "20px" }}>
                                             {loading ? "Enviando..." : "Enviar Respuesta"}
                                         </Button>

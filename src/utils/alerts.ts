@@ -126,7 +126,7 @@ export const showWeddingConfirmAlert = (guestName: string) => {
         icon: 'success',
         iconColor: '#1a3b34',
         confirmButtonText: '¡Nos vemos pronto!',
-        timer: 5000,
+        timer: 10000,
         timerProgressBar: true
     });
 };
