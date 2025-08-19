@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getStoredUser, userLogin } from "../firebase/functions";
+import { getStoredUser, userLogin, renewSession } from "../firebase/functions";
 import { ContainerLogged, Flex, InputApp } from "./styled";
 import { showErrorAlert } from '../utils/alerts';
 
@@ -12,6 +12,8 @@ const Login: React.FC = () => {
     useEffect(() => {
         const storedUser = getStoredUser();
         if (storedUser) {
+            // Renovar sesión para mantenerla activa
+            renewSession();
             navigate("/dashboard");
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
