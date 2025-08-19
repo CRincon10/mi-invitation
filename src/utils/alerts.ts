@@ -119,12 +119,10 @@ export const showWeddingConfirmAlert = (guestName: string) => {
                     ¡Gracias por confirmar tu asistencia a nuestra boda!
                 </p>
                 <p style="color: #1a3b34; font-weight: 500;">
-                    Tu presencia hará este día aún más especial 💍
+                    Tu presencia hará este día aún más especial
                 </p>
             </div>
         `,
-        icon: 'success',
-        iconColor: '#1a3b34',
         confirmButtonText: '¡Nos vemos pronto!',
         timer: 10000,
         timerProgressBar: true
@@ -149,8 +147,6 @@ export const showRegretAlert = (guestName: string) => {
                 </p>
             </div>
         `,
-        icon: 'info',
-        iconColor: '#17a2b8',
         confirmButtonText: 'Entendido',
         timer: 4000,
         timerProgressBar: true

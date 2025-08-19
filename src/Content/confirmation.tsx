@@ -212,7 +212,7 @@ export const Confirmation = () => {
                                             </Flex>
                                         </Flex>
                                     }
-                                    <Flex marginTop={30} marginBottom={30}>
+                                    <Flex marginTop={30} marginBottom={60}>
                                         <Button w100 className={isButtonDisabled ? "disabled" : ""} disabled={isButtonDisabled} onClick={() => handleConfirm()} style={{ marginTop: "20px" }}>
                                             {loading ? "Enviando..." : "Enviar Respuesta"}
                                         </Button>
