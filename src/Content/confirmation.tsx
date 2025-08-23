@@ -178,12 +178,12 @@ export const Confirmation = () => {
                                     <Flex column gap20 marginTop={30} alignStart>
                                         <span className="color-app" style={{ fontSize: "22px" }}>{`- ${confirmCompanion ? "Asisten" : "Asistes"} a la ceremonia?`}</span>
                                         <Flex spaceBetween gap20 column>
-                                            <Flex alignCenter gap10 onClick={() => setConfirm({ ...confirm, asisteCeremonia: true })}>
-                                                <Circle selected={confirm?.asisteCeremonia === true}>✔</Circle>
+                                            <Flex cursorPointer alignCenter gap10 onClick={() => setConfirm({ ...confirm, asisteCeremonia: true })}>
+                                                <Circle selected={confirm?.asisteCeremonia === true} attends={true}>✔</Circle>
                                                 <span style={{ fontSize: "18px" }} className="color-app">{`${confirmCompanion ? "¡Sí! Confirmamos" : "¡Sí! Confirmo."}`}</span>
                                             </Flex>
-                                            <Flex alignCenter gap10 onClick={() => setConfirm({ ...confirm, asisteCeremonia: false })}>
-                                                <Circle selected={confirm.asisteCeremonia === false}>✖</Circle>
+                                            <Flex cursorPointer alignCenter gap10 onClick={() => setConfirm({ ...confirm, asisteCeremonia: false })}>
+                                                <Circle selected={confirm.asisteCeremonia === false} attends={false}>✖</Circle>
                                                 <span style={{ fontSize: "18px" }} className="color-app">{`${confirmCompanion ? "¡No! No podemos : (" : "¡No! No puedo : ("}`}</span>
                                             </Flex>
                                         </Flex>
@@ -192,11 +192,11 @@ export const Confirmation = () => {
                                         <span className="color-app" style={{ fontSize: "22px" }}>{`- ${confirmCompanion ? "Asisten" : "Asistes"} a la recepción?`}</span>
                                         <Flex spaceBetween column gap20>
                                             <Flex alignCenter gap10 onClick={() => setConfirm({ ...confirm, asisteRecepcion: true })}>
-                                                <Circle selected={confirm.asisteRecepcion === true}>✔</Circle>
+                                                <Circle selected={confirm.asisteRecepcion === true} attends={true}>✔</Circle>
                                                 <span style={{ fontSize: "18px" }} className="color-app">{`${confirmCompanion ? "¡Sí! Confirmamos" : "¡Sí! Confirmo."}`}</span>
                                             </Flex>
                                             <Flex alignCenter gap10 onClick={() => setConfirm({ ...confirm, asisteRecepcion: false })}>
-                                                <Circle selected={confirm.asisteRecepcion === false}>✖</Circle>
+                                                <Circle selected={confirm.asisteRecepcion === false} attends={false}>✖</Circle>
                                                 <span style={{ fontSize: "18px" }} className="color-app">{`${confirmCompanion ? "¡No! No podemos : (" : "¡No! No puedo : ("}`}</span>
                                             </Flex>
                                         </Flex>

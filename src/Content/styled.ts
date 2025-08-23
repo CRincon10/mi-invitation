@@ -373,6 +373,7 @@ export const ConfirmationOption = styled.div`
     cursor: pointer;
 `;
 
+
 export const Circle = styled.div<CircleProps>`
     width: 30px;
     height: 30px;
@@ -383,7 +384,12 @@ export const Circle = styled.div<CircleProps>`
     align-items: center;
     font-weight: bold;
     color: ${({ selected }) => (selected ? "white" : "#b19776")};
-    background: ${({ selected }) => (selected ? "#b19776" : "white")};
+    background: ${({ selected, attends }) =>
+        selected
+            ? attends
+                ? '#307b32ff' // verde si asiste
+                : '#ae261dff' // rojo si no asiste
+            : 'white'};
     transition: background 0.3s ease, color 0.3s ease;
 `;
 
@@ -414,6 +420,7 @@ export const InputApp = styled.input`
 
 interface CircleProps {
     selected: boolean;
+    attends: boolean;
 }
 
 //USERS LOGGED
